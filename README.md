@@ -12,3 +12,8 @@ Group Members
 * Shreya Kalva
 
 As we work out the roles involves, we will update this doc. We hope to use the concepts we've been learning this term (MVC, higher order functions, etc.) to be able to envision reading a book in a new and more modern way.
+
+For Friday April 5th:
+* code for dividing into "book clubs"
+* login stuff? with encripted password perhaps?
+* templates for the above
