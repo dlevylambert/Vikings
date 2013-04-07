@@ -4,7 +4,6 @@ import sys
 import time
 import base64
 import random
-import gamesystem
 import math
 from pymongo import Connection
 
@@ -18,7 +17,7 @@ def createUser(user,password):
     if users.find_one({"user" : user}) != None:
         return False
     tmp = base64.b64encode(password)
-    newuser = {"user" : user, "pass" : tmp, "game" : 0, "wins" : 0, "loses" : 0,"friends" : []}
+    newuser = {"user" : user, "pass" : tmp}
     users.insert(newuser)
     return True
 
@@ -39,3 +38,8 @@ def checkUserPass(user,password):
     else:
         return False
 
+
+#if __name__ == "__main__":
+#    createUser("Dina", "hello")
+#    print checkUserPass("Dina", "hello")
+#    print checkUserPass("Dina", "he")
