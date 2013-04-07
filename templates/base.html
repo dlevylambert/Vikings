@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <title>{% block title %}Title{% endblock %}</title>
+  {% block head %}
+  <link rel="shortcut icon" href="{{url_for("static", filename="favicon.ico")}}">
+  <style type="text/css">@import "{{url_for("static", filename="css/main.css")}}";</style>
+  <script src="/static/js/jquery.js"></script>
+  {% endblock %}
+  </head>
+{% block tabs %}
+  <div id="tabs">
+    <ul id="tabnav">
+      <form action="" method="POST">
+      <li class="tab1"><button name="tabhome">Home</button></li>
+      </form>
+      <form action="" method="POST">
+      <li class="tab1"><button name="tablogin">Log In</button></li>
+      </form>
+      <form action="" method="POST">
+      <li class="tab1"><button name="tabsignup">Sign Up</button></li>
+      </form>
+       <form action="" method="POST">
+      <li class="tab1"><button name="tabcreate">Create Matching Survey</button></li>
+      </form>
+       <form action="" method="POST">
+      <li class="tab1"><button name="tabjoin">Take Matching Survey</button></li>
+      </form>
+    </ul>
+  </div>
+{% endblock %}
+<body>
+{% block body %}
+{% endblock %}
+</body>
+</html>

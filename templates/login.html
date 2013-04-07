@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Log In{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block tabs %}{{super()}}{% endblock %}
+{% block body %}
+<div class="content">
+  <br>
+  <center><h2>Enter your username and password</h2></center><br>
+  <div id="input">
+    <form action="" method="POST">
+      <input type="text" name="Username" class="" placeholder="Type your username"></input>
+      <input type="password" name="Password" class="" placeholder="Type your password" ></input>
+      <input class="button" type="submit" name="submitlogin" value="Login" class=""></input>
+      <br><br>
+    </form>
+  </div>
+</div>
+{% endblock %}
