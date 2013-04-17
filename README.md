@@ -4,7 +4,7 @@ Vikings
 Matching program with defaults. 
 
 Group Members 
-* Helen Nie
+* Helen Nieayh
 * David Kurkovskiy
 * Dina Levy-Lambert = team leader (nominated by Helen)
 * Shreya Kalva
