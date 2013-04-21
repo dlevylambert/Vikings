@@ -13,6 +13,20 @@ res = db.authenticate('stuycs','stuycs')
 users = db.VikingsUsers
 surveys = db.VikingsSurveys
 
+
+"""
+Function: takeSurvey(string user, string survey, int[] ans)
+Purpose: save the user's answers for the survey
+Return: Boolean
+
+Last Edited: 4/21/13 at 16:06 by Helen Nie
+Tested: yes
+"""
+def takeSurvey(user, survey, ans):
+    users = surveys.find_one({"name" : survey})["users"]
+    users[user] = ans
+    return True
+
 def createUser(user,password):
     if users.find_one({"user" : user}) != None:
         return False
@@ -24,7 +38,7 @@ def createUser(user,password):
 def createSurvey(password,name):
     if surveys.find_one({"name":name}) != None:
         return False
-    newsurvey = {"name" : name, "questions" : []}
+    newsurvey = {"name" : name, "questions" : [], "users": {}}
     surveys.insert(newsurvey)
     return True
 
@@ -43,3 +57,5 @@ def checkUserPass(user,password):
 #    createUser("Dina", "hello")
 #    print checkUserPass("Dina", "hello")
 #    print checkUserPass("Dina", "he")
+#    createSurvey("hello", "test")
+#    takeSurvey("Dina", "test", [1, 1, 1, 1, 1])
