@@ -27,6 +27,7 @@ def takeSurvey(user, survey, ans):
     users[user] = ans
     return True
 
+
 def createUser(user,password):
     if users.find_one({"user" : user}) != None:
         return False
