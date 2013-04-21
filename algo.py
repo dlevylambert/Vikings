@@ -12,12 +12,14 @@ Tested:yes
 """
 def findMatches(users, user):
     matches = {}
+    numQs = len(users[user])
+
     vectors = vectorize(users)
     diff = sortByDiff(vectors, user)
 
-    matches['best'] = percent(bestMatch(diff))
-    matches['worst'] = percent(worstMatch(diff))
-    matches['overall'] = percent(overallBestMatch(diff))
+    matches['best'] = percent(bestMatch(diff), numQs)
+    matches['worst'] = percent(worstMatch(diff), numQs)
+    matches['overall'] = percent(overallBestMatch(diff), numQs)
     print matches
     return matches
 
@@ -93,15 +95,15 @@ def sortByDiff(vectors, user):
 
 
 """
-Function: percent(tuple[] matches)
-Purpose: to convert difference values to percentages by comparing them to the largest possible difference, 120.0
+Function: percent(tuple[] matches, int numQs)
+Purpose: to convert difference values to percentages by comparing them to the largest possible difference
 Return: a list of tuples of the form (percentage, name)
 
 Last Edited: 4/21/13 at 15:27 by Helen Nie
 Tested:yes
 """
-def percent(matches):
-    largest = 120.0
+def percent(matches, numQs):
+    largest = float(numQs * (5 * 5 - 1 * 1))
     percents = [((100 - match[0] / largest * 100), match[1]) for match in matches]
     return percents
 
