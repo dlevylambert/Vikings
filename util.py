@@ -6,13 +6,15 @@ import base64
 import random
 import math
 from pymongo import Connection
+from gridfs import GridFS
 
 Conn = Connection('ds041367.mongolab.com',41367)
 db = Conn['stuycs_sideprojects']
 res = db.authenticate('stuycs','stuycs')
 users = db.VikingsUsers
 surveys = db.VikingsSurveys
-
+#pics = db.VikingsPics
+#fs = GridFS(db, 'pics')
 
 """
 Function: takeSurvey(string user, string survey, int[] ans)
