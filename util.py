@@ -21,13 +21,6 @@ def createUser(user,password):
     users.insert(newuser)
     return True
 
-def createSurvey(password,name):
-    if surveys.find_one({"name":name}) != None:
-        return False
-    newsurvey = {"name" : name, "questions" : []}
-    surveys.insert(newsurvey)
-    return True
-
 def checkUserPass(user,password):
     encpass = base64.b64encode(password)
     tmp = users.find_one({"user" : user})
@@ -37,6 +30,13 @@ def checkUserPass(user,password):
         return True
     else:
         return False
+
+def createSurvey(password,name):
+    if surveys.find_one({"name":name}) != None:
+        return False
+    newsurvey = {"name" : name, "questions" : []}
+    surveys.insert(newsurvey)
+    return True
 
 
 #if __name__ == "__main__":
