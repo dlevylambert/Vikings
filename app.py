@@ -43,5 +43,35 @@ def login():
         if request.form.has_key("tabhome"):
             return redirect(url_for("home"))
 
+@app.route("/signup",methods=["POST","GET"])
+def signup():
+    if request.method=="GET":
+        return render_template("signup.html")
+    else:
+
+@app.route("/profile",methods=["POST","GET"])
+def profile():
+    if request.method=="GET":
+        return render_template("signup.html")
+    else:
+
+@app.route("/survey",methods=["POST","GET"])
+def survey():
+    if request.method=="GET":
+        return render_template("signup.html")
+    else:
+
+@app.route("/create",methods=["POST","GET"])
+def create():
+    if request.method=="GET":
+        return render_template("signup.html")
+    else:
+
+@app.route("/results",methods=["POST","GET"])
+def results():
+    if request.method=="GET":
+        return render_template("signup.html")
+    else:
+
 if __name__ == "__main__":
     app.run(debug=True)
