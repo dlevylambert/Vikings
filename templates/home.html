@@ -5,9 +5,10 @@
 {% endblock %}
 {% block tabs %}{{super()}}{% endblock %}
 {% block body %}
+  <style type="text/css">@import "{{url_for("static", filename="css/main.css")}}";</style>
 <div class="content">
   <center>
-    <h2>Matching with Vikings</h2>
+    <h3>Matching with Vikings</h3>
     <div class="text">
       <strong><p>Welcome to the matching site.</p></strong>
     </div>

@@ -66,6 +66,8 @@ def login():
 @app.route("/results", methods=["POST", "GET"])
 def results():
     if request.method=="GET":
+        if 'user' not in session:
+            return redirect(url_for("login"))
         return render_template("results.html")
     else:
         if request.form.has_key("tablogin"):
@@ -121,6 +123,8 @@ def signup():
 @app.route("/profile",methods=["POST","GET"])
 def profile():
     if request.method=="GET":
+        if 'user' not in session:
+            return redirect(url_for("login"))
         return render_template("profile.html")
     else:
         if request.form.has_key("tablogin"):
@@ -141,6 +145,8 @@ def profile():
 @app.route("/survey",methods=["POST","GET"])
 def survey():
     if request.method=="GET":
+        if 'user' not in session:
+            return redirect(url_for("login"))
         return render_template("survey.html")
     else:
         if request.form.has_key("tablogin"):
@@ -161,6 +167,8 @@ def survey():
 @app.route("/create",methods=["POST","GET"])
 def create():
     if request.method=="GET":
+        if 'user' not in session:
+            return redirect(url_for("login"))
         return render_template("create.html")
     else:
         if request.form.has_key("tablogin"):

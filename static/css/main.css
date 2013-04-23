@@ -1,11 +1,11 @@
 * {margin:0;
                    padding:0;
-                   font-family:"Courier New","Lucida Console",courier,monospace;
+                   font-family: Arial, Helvetica, sans-serif;
 font-size:15;
 }
 
 html {
-                  background-image:url('../wood_1.png');
+                  background-image:url('../background.png');
 }
 
 body {
@@ -14,11 +14,9 @@ height:80%;
 margin:0px 0px 0px 1.5em;
                   }
 
-/* begin css tabs. credit Joshua Kaufman of unraveled.com */
-
 ul#tabnav { /* general settings */
-                   text-align: left; /* set to left, right or center */
-margin: 0 0; /* set margins as desired */
+                   text-align: center; /* set to left, right or center */
+margin: 3 3; /* set margins as desired */
 list-style-type: none;
 padding: 15px 10px 0px 10px; /* THIRD number must change with respect to padding-top (X) below */
                    }
@@ -50,7 +48,7 @@ border-left:1px solid black;
 border-bottom:0px;
 border-top-right-radius:4px;
 border-top-left-radius:4px;
-background-image:url('../bedge_grunge.png');
+background-image:url('../background.png');
 color:black; /* set unselected tab color as desired */
 margin-right: 0px; /* set additional spacing between tabs as desired */
 border-bottom: none;
@@ -61,9 +59,10 @@ text-shadow: 2px 2px 2px black;
 ul#tabnav form button:hover { /* settings for hover effect */
                    font-weight:bold;
                    }
-
-/* end css tabs. credit Joshua Kaufman of unraveled.com */
-
+h3 {
+margin: 20px 20px;
+font-size: 50
+}
 form {
                    display: inline;
 margin:0px;

@@ -3,8 +3,7 @@
 <head>
   <title>{% block title %}Title{% endblock %}</title>
   {% block head %}
-  <link rel="shortcut icon" href="{{url_for("static", filename="favicon.ico")}}">
-  <style type="text/css">@import "{{url_for("static", filename="css/main.css")}}";</style>
+ <style type="text/css">@import "{{url_for("static", filename="css/main.css")}}";</style>
   <script src="/static/js/jquery.js"></script>
   {% endblock %}
   </head>
@@ -21,10 +20,10 @@
       <li class="tab1"><button name="tabsignup">Sign Up</button></li>
       </form>
        <form action="" method="POST">
-      <li class="tab1"><button name="tabcreate">Create Matching Survey</button></li>
+      <li class="tab1"><button name="tabcreate">Create Survey</button></li>
       </form>
        <form action="" method="POST">
-      <li class="tab1"><button name="tabjoin">Take Matching Survey</button></li>
+      <li class="tab1"><button name="tabsurvey">Take Survey</button></li>
       </form>
     </ul>
   </div>
