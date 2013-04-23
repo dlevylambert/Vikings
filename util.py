@@ -56,6 +56,7 @@ def createSurvey(password,name):
     return True
 
 
+
 #if __name__ == "__main__":
 #    createUser("Dina", "hello")
 #    print checkUserPass("Dina", "hello")
