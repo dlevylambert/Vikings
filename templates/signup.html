@@ -12,6 +12,13 @@
       <strong><p>Make an account!</p></strong>
     </div>
   </center>
+
+<div class="message">
+  {% if failure %}
+  <p>Username already taken!</p>
+  {% endif %}
+</div>
+
 </div>
   <div id="input">
     <form action="" method="POST">
