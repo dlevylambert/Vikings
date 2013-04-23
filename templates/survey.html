@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Survey: {{surveyname}} {% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block tabs %}{{super()}}{% endblock %}
+{% block body %}
+<div id="survey">
+</div>
+<script src="/static/js/survey.js"></script>
+{% endblock %}
