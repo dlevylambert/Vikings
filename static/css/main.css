@@ -1,0 +1,187 @@
+* {margin:0;
+                   padding:0;
+                   font-family:"Courier New","Lucida Console",courier,monospace;
+font-size:15;
+}
+
+html {
+                  background-image:url('../wood_1.png');
+}
+
+body {
+width:85%;
+height:80%;
+margin:0px 0px 0px 1.5em;
+                  }
+
+/* begin css tabs. credit Joshua Kaufman of unraveled.com */
+
+ul#tabnav { /* general settings */
+                   text-align: left; /* set to left, right or center */
+margin: 0 0; /* set margins as desired */
+list-style-type: none;
+padding: 15px 10px 0px 10px; /* THIRD number must change with respect to padding-top (X) below */
+                   }
+
+ul#tabnav li { /* do not change */
+                   display: inline;
+                   }
+
+body#tab1 li.tab1, body#tab2 li.tab2, body#tab3 li.tab3, body#tab4 li.tab4
+                   { /* settings for selected tab */
+                   /*border-bottom: 1px solid #fff; /* set border color to page background color */
+background-color: #fff; /* set background color to match above border color */
+                   }
+
+body#tab1 li.tab1 button, body#tab2 li.tab2 button, body#tab3 li.tab3 button, body#tab4 li.tab4 button
+                   { /* settings for selected tab link */
+background-color: #fff; /* set selected tab background color as desired */
+color: #000; /* set selected tab link color as desired */
+position: relative;
+top: 1px;
+padding-top: 4px; /* must change with respect to padding (X) above and below */
+                   }
+
+ul#tabnav li button { /* settings for all tab links */
+                   padding: 5px 8px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
+border-top: 1px solid black; /* set border COLOR as desired; usually matches border color specified in #tabnav */
+border-right:1px solid black;
+border-left:1px solid black;
+border-bottom:0px;
+border-top-right-radius:4px;
+border-top-left-radius:4px;
+background-image:url('../bedge_grunge.png');
+color:black; /* set unselected tab color as desired */
+margin-right: 0px; /* set additional spacing between tabs as desired */
+border-bottom: none;
+font-size: 24px;
+text-shadow: 2px 2px 2px black;
+                   }
+
+ul#tabnav form button:hover { /* settings for hover effect */
+                   font-weight:bold;
+                   }
+
+/* end css tabs. credit Joshua Kaufman of unraveled.com */
+
+form {
+                   display: inline;
+margin:0px;
+                   }
+
+.awaitinggame {
+padding:4px;
+                   }
+
+.awaitinggame gamename{
+                   width:500px
+                   }
+
+table {
+                   margin:0px 15px;
+                   }
+
+table, th, td {
+                   border-collapse:collapse;
+border:1px solid;
+text-align:center;
+vertical-align:middle;
+}
+
+td {
+                   padding: 4px 15px;
+                   }
+
+/*[name='submitjoin']{
+color:#ffffff;
+padding:3px 5px;
+background:#333333;
+box-shadow:0px 2px 4px black;
+}
+
+[name='submitjoindis']{
+color:#ffffff;
+padding:3px 5px;
+background:#888888;
+box-shadow:0px 2px 4px black;
+}
+*/
+[name='Password'] {
+                   padding: 4px;
+                   }
+
+[name='Username'] {
+                   padding:4px;
+margin:0px 4px 0px 15px;
+                   }
+
+ul.circle {
+                   padding-left:60px;
+                   list-style-type:disc;
+                   }
+
+h2 {
+                   text-shadow:0 0 0.05em black;
+}
+
+.content {
+                   background-image:url('../extra_clean_paper.png');
+                   border-radius:8px;
+padding:10px 10px 20px;
+position:absolute;
+width:85%;
+}
+
+.content#table {
+                   min-width:975px;
+                   }
+
+.content * {
+                   position:relative;
+                   }
+
+.wrapper {
+                   background-image:url('../extra_clean_paper.png');
+width:85%;
+height:95%;
+position:absolute;
+border-radius:8px;
+                   }
+.button {
+                  border-radius:2px;
+padding:4px;
+background-color:#999999;
+box-shadow: 0.1em 0.1em 0.1em black;
+font-weight:bold;
+                  }
+
+.button:hover {
+                  color:#cccc7a;
+}
+
+.button#check-in {
+                  border-radius:6px;
+padding:5px 10px;
+                  font-size:20px;
+text-shadow:0.1em 0.1em 0.1em #4c4c4c;
+box-shadow: 0.1em 0.1em 0.2em black;
+                  }
+
+.button#assassinate{
+                  border-radius:6px;
+padding:5px 10px;
+font-size:20px;
+text-shadow: 0.1em 0.1em 0.1em #4c4c4c;
+box-shadow: 0.1em 0.1em 0.2em black;
+margin-left:40px;
+}
+
+.button#start {
+                  border-radius:6px;
+padding:5px 10px;
+font-size:20px;
+text-shadow: 0.1em 0.1em 0.1em #4c4c4c;
+box-shadow: 0.1em 0.1em 0.2em black;
+margin-left:40px;
+background-color:#52cc29;
+}
