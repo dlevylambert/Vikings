@@ -54,23 +54,59 @@ def createSurvey(password,name):
     surveys.insert(newsurvey)
     return True
 
-def findDiffs(surveyname, user):
-    surv = surveys.find_one({"name": surveyname})
-    difference = 0
-    useranswers =[]
-    for answer in surv["useranswers"][user]:
-        useranswers.append(answer)
-    for person in surv["useranswers"]:
-        if person == user:
-            pass
-        else:
-            for answer in person:
-                difference += math.fabs(answer - useranswers.pop(0))
-            #store in survey database
+def findDiffs(surveyName, user):
+    surveys[surveyName]['userdifferences'][user] = {}
+    sumDiffs = surveys[surveyName]['userdifferences'][user]
+    allUsers = surveys[surveyName]['useranswers']
+    thisUser = allUsers[user]
+
+    for x in allUsers:
+        if x != user:
+            diffs = [math.fabs(allUsers[x][i] - thisUser[i]) for i in range(0, len(thisUser))]
+            sumDiffs[x] = sum(diffs)
+    return True    
+
+def findPercents(surveyName, user):
+    surveys[surveyName]['userpercentages'][user] = {}
+    percents = surveys[surveyName]['userpercentages'][user]
+    sumDiffs = surveys[surveyName]['userdifferences'][user]
+    
+    numQs = len(surveys[surveyName]['useranswers'][user])
+    maxDiff = 4.0 * numQs
+    
+    for x in sumDiffs:
+        percents[x] = 100 - (sumDiffs[x] / maxDiff) * 100
+    return True
+
+def match(surveyName, user):
+    matchesData = {}
+    percents = surveys[surveyName]['userpercentages'][user]
+    
+    numQs = len(surveys[surveyName]['useranswers'][user])
+    maxDiff = 4.0 * numQs
+    matchesData['maxPercent'] = max(percents[x] for x in percents)
+    matchesData['minPercent'] = min(percents[x] for x in percents)
+    
+    matchesData['best'] = [x for x in percents if percents[x] == matchesData['maxPercent']]
+    matchesData['worst'] = [x for x in percents if percents[x] == matchesData['minPercent']]
+    matchesData['overallBest'] = []
+    
+    return matchesData
+    
 
 #if __name__ == "__main__":
 #    createUser("Dina", "hello")
 #    print checkUserPass("Dina", "hello")
 #    print checkUserPass("Dina", "he")
 #    createSurvey("hello", "test")
-#    takeSurvey("Dina", "test", [1, 1, 1, 1, 1])
+#    takeSurvey("Dina", "test", [1, 1, 1, 1, 1]
+
+#    #testing algorithm
+#    surveys = {'test':{'useranswers':{'Helen':[2, 2, 2], 'Shreya':[2, 2, 2], 'Dina':[2, 2, 2], 'David':[5, 5, 5]},
+#                   'userdifferences':{'Helen': {'Shreya': 0.0, 'Dina': 0.0, 'David': 9.0}},
+#                   'userpercentages':{'Helen': {'Shreya': 100.0, 'Dina': 100.0, 'David': 25.0}}}}
+
+#    findDiffs('test', 'Helen')
+#    findPercents('test', 'Helen')    			   
+#    print surveys['test']
+#    print match('test', 'Helen');
