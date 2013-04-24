@@ -24,11 +24,10 @@ Return: Boolean
 Last Edited: 4/21/13 at 16:06 by Helen Nie
 Tested: yes
 """
-def takeSurvey(user, survey, ans):
-    users = surveys.find_one({"name" : survey})["users"]
-    users[user] = ans
-    return True
-
+def takeSurvey(surveyname, user, ans):
+    surv = surveys.find_one({"name": surveyname})
+    surv["useranswers"][user] = ans
+    return true
 
 def createUser(user,password):
     if users.find_one({"user" : user}) != None:
@@ -51,11 +50,23 @@ def checkUserPass(user,password):
 def createSurvey(password,name):
     if surveys.find_one({"name":name}) != None:
         return False
-    newsurvey = {"name" : name, "questions" : []}
+    newsurvey = {"name" : name, "questions" : [], "useranswers": {}, "userdifferences": {}, "userpercentage": {}} 
     surveys.insert(newsurvey)
     return True
 
-
+def findDiffs(surveyname, user):
+    surv = surveys.find_one({"name": surveyname})
+    difference = 0
+    useranswers =[]
+    for answer in surv["useranswers"][user]:
+        useranswers.append(answer)
+    for person in surv["useranswers"]:
+        if person == user:
+            pass
+        else:
+            for answer in person:
+                difference += math.fabs(answer - useranswers.pop(0))
+            #store in survey database
 
 #if __name__ == "__main__":
 #    createUser("Dina", "hello")
