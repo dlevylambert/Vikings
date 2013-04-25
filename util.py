@@ -8,9 +8,10 @@ import math
 from pymongo import Connection
 from gridfs import GridFS
 
-Conn = Connection('ds041367.mongolab.com',41367)
-db = Conn['stuycs_sideprojects']
-res = db.authenticate('stuycs','stuycs')
+Conn = Connection('mongo.stuycs.org')
+db = connetion.admin
+res = db.authenticate('ml7','ml7')
+db = connection['z-pd6']
 users = db.VikingsUsers
 surveys = db.VikingsSurveys
 #pics = db.VikingsPics
@@ -92,7 +93,10 @@ def match(surveyName, user):
     matchesData['overallBest'] = []
     
     return matchesData
-    
+
+
+def create(surveyname, questions): #questions is a list of lists, with first question and then type
+    pass
 
 #if __name__ == "__main__":
 #    createUser("Dina", "hello")

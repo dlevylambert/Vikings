@@ -28,7 +28,18 @@ def home():
             return redirect(url_for("survey"))
         if request.form.has_key("tabresults"):
             return redirect(url_for("results"))
-            
+
+@app.route("/getquestions")
+def getquestions():
+    surveyname = request.args.get('surveyname', '') #write JS method for this
+    return json.dumps(util.getSurveyQs(surveyname)) #this too
+
+@app.route("/matchfind")
+def matchfind():
+    surveyname = request.args.get('surveyname', '') #write JS method for this
+    username = request.args.get('username', '')
+    return json.dumps(util.match(surveyname, username))
+
 @app.route("/login",methods=["POST","GET"])
 def login():
     if request.method=="GET":
@@ -147,7 +158,7 @@ def survey():
     if request.method=="GET":
         if 'user' not in session:
             return redirect(url_for("login"))
-        return render_template("survey.html")
+        return render_template("survey.html", surveynames = util.getSurveyNames())
     else:
         if request.form.has_key("tablogin"):
             return redirect(url_for("login"))

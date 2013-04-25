@@ -5,6 +5,13 @@
 {% endblock %}
 {% block tabs %}{{super()}}{% endblock %}
 {% block body %}
+<form action="" method="POST">
+<select name ="survey_selection">
+{% for survey in surveynames%}
+<option> {{survey}} </option>
+{% endfor %}
+</select>
+</form>
 <div id="survey">
 </div>
 <script src="/static/js/survey.js"></script>
