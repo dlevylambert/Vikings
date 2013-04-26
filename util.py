@@ -105,18 +105,34 @@ def match(surveyName, user):
     
     return matchesData
 
+def getSurveyQs(surveyName):
+    return surveys.find_one({'name':surveyName})
 
+#not tested
+def getSurveyNames():
+    return [x['name'] for x in surveys.get_indexes()]
+
+#not tested
+def getUserInfo(userName):
+    return users.find_one({'name':userName})
+
+#not tested
+def editUserInfo(userName, fieldChange, newValue):
+    
+    
 if __name__ == "__main__":
 #    createUser("Dina", "hello")
 #    print checkUserPass("Dina", "hello")
 #    print checkUserPass("Dina", "he")
     createSurvey("test", [])
-    takeSurvey("test", "Helen", [1, 1, 1, 1, 1])
-    takeSurvey("test", "Dina", [1, 1, 1, 1, 1])
-    takeSurvey("test", "Shreya",  [1, 1, 1, 1, 1])
-    takeSurvey("test", "David",  [2, 2, 2, 2, 2])
+    createSurvey("test2", [])
+    print getSurveyNames()
+#    takeSurvey("test", "Helen", [1, 1, 1, 1, 1])
+#    takeSurvey("test", "Dina", [1, 1, 1, 1, 1])
+#    takeSurvey("test", "Shreya",  [1, 1, 1, 1, 1])
+#    takeSurvey("test", "David",  [2, 2, 2, 2, 2])
 
 #    #testing algorithm
-    findDiffs('test', 'Helen')
-    findPercents('test', 'Helen')
-    match('test', 'Helen')
+#    findDiffs('test', 'Helen')
+#    findPercents('test', 'Helen')
+#    match('test', 'Helen')
