@@ -34,6 +34,10 @@ def getquestions():
     surveyname = request.args.get('surveyname', '') #write JS method for this
     return json.dumps(util.getSurveyQs(surveyname)) #this too
 
+@app.route("/getnames")
+def getnames():
+    return json.dumps(util.getSurveyNames())
+
 @app.route("/matchfind")
 def matchfind():
     surveyname = request.args.get('surveyname', '') #write JS method for this

@@ -6,7 +6,7 @@
 {% block tabs %}{{super()}}{% endblock %}
 {% block body %}
 <form action="" method="POST">
-<select name ="survey_selection">
+<select name ="survey_selection" id = "names">
 {% for survey in surveynames%}
 <option> {{survey}} </option>
 {% endfor %}
