@@ -8,8 +8,8 @@ import math
 from pymongo import Connection
 from gridfs import GridFS
 
-Conn = Connection('mongo.stuycs.org')
-db = connetion.admin
+connection = Connection('mongo2.stuycs.org')
+db = connection.admin
 res = db.authenticate('ml7','ml7')
 db = connection['z-pd6']
 users = db.VikingsUsers
@@ -26,9 +26,13 @@ Last Edited: 4/21/13 at 16:06 by Helen Nie
 Tested: yes
 """
 def takeSurvey(surveyname, user, ans):
-    surv = surveys.find_one({"name": surveyname})
-    surv["useranswers"][user] = ans
-    return true
+    surv = surveys.find_one({'name': surveyname})
+    allAnswers = dict(surv)
+    allAnswers['useranswers'].update({user:ans})
+    surveys.update(
+        {'name':surveyname},
+        allAnswers)
+    return True
 
 def createUser(user,password):
     if users.find_one({"user" : user}) != None:
@@ -48,42 +52,49 @@ def checkUserPass(user,password):
     else:
         return False
 
-def createSurvey(password,name):
+def createSurvey(name, questions):
     if surveys.find_one({"name":name}) != None:
         return False
-    newsurvey = {"name" : name, "questions" : [], "useranswers": {}, "userdifferences": {}, "userpercentage": {}} 
-    surveys.insert(newsurvey)
+    surveys.insert({"name" : name, "questions" : questions, "useranswers": {}, "userdifferences": {}, "userpercentages": {}})
     return True
 
 def findDiffs(surveyName, user):
-    surveys[surveyName]['userdifferences'][user] = {}
-    sumDiffs = surveys[surveyName]['userdifferences'][user]
-    allUsers = surveys[surveyName]['useranswers']
+    thisSurvey = dict(surveys.find_one({'name': surveyName}))
+    allUsers = thisSurvey['useranswers']
     thisUser = allUsers[user]
+    thisSurvey['userdifferences'][user] = {}
 
     for x in allUsers:
         if x != user:
             diffs = [math.fabs(allUsers[x][i] - thisUser[i]) for i in range(0, len(thisUser))]
-            sumDiffs[x] = sum(diffs)
+            thisSurvey['userdifferences'][user].update({x:sum(diffs)})
+            surveys.update(
+                {'name':surveyName},
+                thisSurvey)
     return True    
 
 def findPercents(surveyName, user):
-    surveys[surveyName]['userpercentages'][user] = {}
-    percents = surveys[surveyName]['userpercentages'][user]
-    sumDiffs = surveys[surveyName]['userdifferences'][user]
-    
-    numQs = len(surveys[surveyName]['useranswers'][user])
+    thisSurvey = dict(surveys.find_one({'name': surveyName}))
+    sumDiffs = thisSurvey['userdifferences'][user]
+    thisSurvey['userpercentages'][user] = {}    
+
+    numQs = len(thisSurvey['useranswers'][user])
     maxDiff = 4.0 * numQs
     
     for x in sumDiffs:
-        percents[x] = 100 - (sumDiffs[x] / maxDiff) * 100
+        percent = 100 - (sumDiffs[x] / maxDiff) * 100
+        thisSurvey['userpercentages'][user].update({x:percent})
+        surveys.update(
+            {'name':surveyName},
+            thisSurvey)
     return True
 
 def match(surveyName, user):
     matchesData = {}
-    percents = surveys[surveyName]['userpercentages'][user]
+    thisSurvey = dict(surveys.find_one({'name': surveyName}))
+    percents = thisSurvey['userpercentages'][user]
     
-    numQs = len(surveys[surveyName]['useranswers'][user])
+    numQs = len(thisSurvey['useranswers'][user])
     maxDiff = 4.0 * numQs
     matchesData['maxPercent'] = max(percents[x] for x in percents)
     matchesData['minPercent'] = min(percents[x] for x in percents)
@@ -95,22 +106,17 @@ def match(surveyName, user):
     return matchesData
 
 
-def create(surveyname, questions): #questions is a list of lists, with first question and then type
-    pass
-
-#if __name__ == "__main__":
+if __name__ == "__main__":
 #    createUser("Dina", "hello")
 #    print checkUserPass("Dina", "hello")
 #    print checkUserPass("Dina", "he")
-#    createSurvey("hello", "test")
-#    takeSurvey("Dina", "test", [1, 1, 1, 1, 1]
+    createSurvey("test", [])
+    takeSurvey("test", "Helen", [1, 1, 1, 1, 1])
+    takeSurvey("test", "Dina", [1, 1, 1, 1, 1])
+    takeSurvey("test", "Shreya",  [1, 1, 1, 1, 1])
+    takeSurvey("test", "David",  [2, 2, 2, 2, 2])
 
 #    #testing algorithm
-#    surveys = {'test':{'useranswers':{'Helen':[2, 2, 2], 'Shreya':[2, 2, 2], 'Dina':[2, 2, 2], 'David':[5, 5, 5]},
-#                   'userdifferences':{'Helen': {'Shreya': 0.0, 'Dina': 0.0, 'David': 9.0}},
-#                   'userpercentages':{'Helen': {'Shreya': 100.0, 'Dina': 100.0, 'David': 25.0}}}}
-
-#    findDiffs('test', 'Helen')
-#    findPercents('test', 'Helen')    			   
-#    print surveys['test']
-#    print match('test', 'Helen');
+    findDiffs('test', 'Helen')
+    findPercents('test', 'Helen')
+    match('test', 'Helen')
