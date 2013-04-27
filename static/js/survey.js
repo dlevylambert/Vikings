@@ -22,7 +22,7 @@ function loadNames() {
 	    $("#survey").append("<b>" + "NO MOVIES FOUND! GO BACK TO SEARCH AGAIN" + "</b>");
 	}
 	$("#names").change(loadInfo);
-	$("#names").change(loadQuestions);
+	//$("#names").change(loadQuestions);
     });
 }
 	     
