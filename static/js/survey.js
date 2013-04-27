@@ -6,7 +6,7 @@ function loadNames() {
     $.getJSON("/getnames", function(data){
 	$("#names").empty();
 
-	if (data.length) > 0 {
+	if (data.length > 0) {
             for (var i = -1; i < data.length; i++){
 		if (i == -1) {
 		    $("#names").append('<option value="'+000+'">' + "Select a survey to take it:" + '<\p>');
@@ -21,31 +21,33 @@ function loadNames() {
 	    console.log("nope");
 	    $("#survey").append("<b>" + "NO MOVIES FOUND! GO BACK TO SEARCH AGAIN" + "</b>");
 	}
-	$("#names").change(loadInfo);
-	//$("#names").change(loadQuestions);
+	$("#names").change(loadQuestions);	
     });
 }
 	     
 
-function loadInfo(e) {
+function loadQuestions(e) {
     /* put survey questions and radio buttons in #survey*/
-    var surveyquestions = loadQuestions($(this).attr("value")); //surveyquestions is a list of lists. format: [[question, type], [questions, type]]
-}
-
-function loadQuestions(surveyname) {
-    var q = []
-    $.getJSON("/getquestions", {surveyname: surveyname}, function(data)) {
-	for (var i = 0; i<data.length; i++) {
-	    q[i] = data["questions"][i];
-	}
-    }
-    return q;
-	//variable data now represents the questions of a particular survey. returns from util.py getSurveyQs, which is all the info for a survey
-    }
+    $("#survey").empty();
+    $("#survey").append('</br>');
+    $.getJSON("/getquestions", {surveyname: $(this).attr("value")}, function(data){
+	for (var i = 0; i < data.length; i++){
+	    $("#survey").append('<p>' + (i+1) + '. ' + data[i][0] + '</p>');
+	    for (var j = 0; j < 5; j++){
+		if (j == 0)
+		    $("#survey").append('<input type="radio" name="'+i+'" value="'+j+'" checked="checked">'+j+'</input>');
+		else
+		    $("#survey").append('<input type="radio" name="'+i+'" value="'+j+'">'+j+'</input>');
+	    }
+	    $("#survey").append('</br></br>');
+	    if (i == data.length - 1)
+		$("#survey").append('<input class="button" id="submitSurvey" type="submit" name="submitSurvey" value="Submit"></input>');
+	}	
+    });
 }
 
 function loadMatches(surveyname, username) {
-    $.getJSON("/matchfind", {surveyname: surveyname, username: username}, function(data)) {
+    $.getJSON("/matchfind", {surveyname: surveyname, username: username}, function(data){
 	//data is matches
-    }
+    });
 }
