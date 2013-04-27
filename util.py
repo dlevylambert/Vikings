@@ -55,7 +55,7 @@ def checkUserPass(user,password):
 def createSurvey(name, questions):
     if surveys.find_one({"name":name}) != None:
         return False
-    surveys.insert({"name" : name, "questions" : questions, "useranswers": {}, "userdifferences": {}, "userpercentages": {}})
+    surveys.insert({"type": "survey", "name" : name, "questions" : questions, "useranswers": {}, "userdifferences": {}, "userpercentages": {}})
     return True
 
 def findDiffs(surveyName, user):
@@ -110,7 +110,13 @@ def getSurveyQs(surveyName):
 
 #not tested
 def getSurveyNames():
-    return [x['name'] for x in surveys.get_indexes()]
+    names = []
+    print surveys.find_one({"type": "survey"})
+    for surv in surveys.find({"type": "survey"}):
+        print surv
+        names.append(surv["name"])
+    return names
+
 
 #not tested
 def getUserInfo(userName):
