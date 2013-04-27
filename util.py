@@ -118,15 +118,15 @@ def getUserInfo(userName):
 
 #not tested
 def editUserInfo(userName, fieldChange, newValue):
+    pass
     
-    
-if __name__ == "__main__":
+#if __name__ == "__main__":
 #    createUser("Dina", "hello")
 #    print checkUserPass("Dina", "hello")
 #    print checkUserPass("Dina", "he")
-    createSurvey("test", [])
-    createSurvey("test2", [])
-    print getSurveyNames()
+#    createSurvey("test", [])
+#    createSurvey("test2", [])
+#    print getSurveyNames()
 #    takeSurvey("test", "Helen", [1, 1, 1, 1, 1])
 #    takeSurvey("test", "Dina", [1, 1, 1, 1, 1])
 #    takeSurvey("test", "Shreya",  [1, 1, 1, 1, 1])
