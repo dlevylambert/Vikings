@@ -118,7 +118,11 @@ def signup():
         if request.form.has_key("submitsignup"):
             user = str(request.form["Username"])
             password = str(request.form["Password"])
-            validate = util.createUser(user,password)
+            age = str(request.form["Username"])
+            realname = str(request.form["Username"])
+            gender = str(request.form["Username"])
+            hobbies = str(request.form["Username"])
+            validate = util.createUser(user,password,age,realname,gender,hobbies)
             if validate == 0:
                 print "no"
                 return render_template("signup.html", failure = True)
