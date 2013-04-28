@@ -216,9 +216,10 @@ def create():
             surveyname = str(request.form['surveyname'])
             questions = []
             for i in range(1, 6):
-                questions.append([str(request.form['q'+i]), str(request.form['q'+i+'type'])])
+                questions.append([str(request.form['q'+str(i)]), str(request.form['q'+str(i)+'type'])])
             print surveyname, questions
-            util.createSurvey(surveyName, questions)
+            util.createSurvey(surveyname, questions)
+            return redirect(url_for('create'))
 
 if __name__ == "__main__":
     #for each question, list format is [question, question type: either number or word]
