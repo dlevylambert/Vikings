@@ -48,12 +48,12 @@ border-left:1px solid black;
 border-bottom:0px;
 border-top-right-radius:4px;
 border-top-left-radius:4px;
-background-image:url("../blue-background");
-color:black; /* set unselected tab color as desired */
+background-image:url("../minimalistic_grey_background.jpg");
+color:#FFFFFF; /* set unselected tab color as desired */
 margin-right: 0px; /* set additional spacing between tabs as desired */
 border-bottom: none;
 font-size: 24px;
-text-shadow: 2px 2px 2px black;
+text-shadow: 2px 2px 2px #FFFFFF;
                    }
 
 ul#tabnav form button:hover { /* settings for hover effect */
