@@ -6,9 +6,11 @@
 {% block tabs %}{{super()}}{% endblock %}
 {% block body %}
 <form action="" method="POST">
+<font color="#013F5C">
 <select name ="survey_selection" id = "names">
 {% for survey in surveynames%}
-<option> {{survey}} </option>
+<option><font color="#013F5C">
+{{survey}}</font> </option>
 {% endfor %}
 </select>
 </form>
