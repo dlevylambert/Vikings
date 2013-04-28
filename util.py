@@ -59,6 +59,9 @@ def createSurvey(name, questions):
     surveys.insert({"type": "survey", "name" : name, "questions" : questions, "useranswers": {}, "userdifferences": {}, "userpercentages": {}})
     return True
 
+def deleteSurvey(name):
+    surveys.remove({"name": name})
+
 def findDiffs(surveyName, user):
     thisSurvey = dict(surveys.find_one({'name': surveyName}))
     allUsers = thisSurvey['useranswers']
@@ -127,7 +130,7 @@ def getUserInfo(userName):
 def editUserInfo(userName, fieldChange, newValue):
     pass
     
-#if __name__ == "__main__":
+if __name__ == "__main__":
 #    createUser("Dina", "hello")
 #    print checkUserPass("Dina", "hello")
 #    print checkUserPass("Dina", "he")
@@ -143,3 +146,4 @@ def editUserInfo(userName, fieldChange, newValue):
 #    findDiffs('test', 'Helen')
 #    findPercents('test', 'Helen')
 #    match('test', 'Helen')
+    deleteSurvey("prom date")
