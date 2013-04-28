@@ -1,11 +1,11 @@
-* {margin:0;
+ * {margin:0;
                    padding:0;
-                   font-family: Arial, Helvetica, sans-serif;
+                   font-family: Tahoma, Helvetica, sans-serif;
 font-size:15;
 }
 
 html {
-                  background-image:url('../background.png');
+                  background-image:url("../main-background.jpg");
 }
 
 body {
@@ -48,12 +48,12 @@ border-left:1px solid black;
 border-bottom:0px;
 border-top-right-radius:4px;
 border-top-left-radius:4px;
-background-image:url('../background.png');
-color:black; /* set unselected tab color as desired */
+background-image:url("../minimalistic_grey_background.jpg");
+color:#FFFFFF; /* set unselected tab color as desired */
 margin-right: 0px; /* set additional spacing between tabs as desired */
 border-bottom: none;
 font-size: 24px;
-text-shadow: 2px 2px 2px black;
+text-shadow: 2px 2px 2px #FFFFFF;
                    }
 
 ul#tabnav form button:hover { /* settings for hover effect */
