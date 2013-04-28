@@ -1,11 +1,11 @@
-* {margin:0;
+ * {margin:0;
                    padding:0;
                    font-family: Tahoma, Helvetica, sans-serif;
 font-size:15;
 }
 
 html {
-                  background-image:url("../main-background.jpg");
+                  background-image:url("../main-background.jpeg");
 }
 
 body {
