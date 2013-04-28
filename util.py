@@ -106,14 +106,14 @@ def match(surveyName, user):
     return matchesData
 
 def getSurveyQs(surveyName):
-    return surveys.find_one({'name':surveyName})
+    survey = dict(surveys.find_one({'name':surveyName}))
+    qs = survey['questions']
+    return qs
 
 #not tested
 def getSurveyNames():
     names = []
-    print surveys.find_one({"type": "survey"})
     for surv in surveys.find({"type": "survey"}):
-        print surv
         names.append(surv["name"])
     return names
 
