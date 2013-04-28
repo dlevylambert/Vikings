@@ -13,5 +13,16 @@
       <strong><p>Welcome to the matching site.</p></strong>
     </div>
   </center>
+
+<form action="" method="POST">
+<select name ="survey_selection" id = "names">
+{% for survey in surveynames%}
+<option> {{survey}} </option>
+{% endfor %}
+</select>
+</form>
+
+<div id="matches"></div>
+
 </div>
 {% endblock %}
