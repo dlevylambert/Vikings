@@ -41,8 +41,16 @@ def getnames():
 @app.route("/matchfind")
 def matchfind():
     surveyname = request.args.get('surveyname', '') #write JS method for this
-    username = request.args.get('username', '')
+    username = session['user']
     return json.dumps(util.match(surveyname, username))
+
+@app.route("/submitSurvey")
+def submitSurvey():
+    surveyname = request.args.get('surveyname', '')
+    ans = request.args.get('ans', '')
+    username = session['user']
+    util.takeSurvey(surveyname, username, ans)
+    return True
 
 @app.route("/login",methods=["POST","GET"])
 def login():
