@@ -109,6 +109,10 @@ def results():
         if request.form.has_key("tabresults"):
             return redirect(url_for("results"))
 
+@app.route("/getUserInfo")
+def getUserInfo():
+    username = session["user"]
+    return json.dumps(util.getUserInfo(username))
 
 @app.route("/signup",methods=["POST","GET"])
 def signup():
