@@ -52,6 +52,7 @@ def submitSurvey():
     print surveyname, ans, username
     return util.takeSurvey(surveyname, username, ans)
 
+
 @app.route("/login",methods=["POST","GET"])
 def login():
     if request.method=="GET":
@@ -211,6 +212,13 @@ def create():
             return redirect(url_for("survey"))
         if request.form.has_key("tabresults"):
             return redirect(url_for("results"))
+        if request.form.has_key("submitcreate"):
+            surveyname = str(request.form['surveyname'])
+            questions = []
+            for i in range(1, 6):
+                questions.append([str(request.form['q'+i]), str(request.form['q'+i+'type'])])
+            print surveyname, questions
+            util.createSurvey(surveyName, questions)
 
 if __name__ == "__main__":
     #for each question, list format is [question, question type: either number or word]
