@@ -32,6 +32,7 @@ def takeSurvey(surveyname, user, ans):
     surveys.update(
         {'name':surveyname},
         allAnswers)
+    print allAnswers
     return True
 
 def createUser(user,password):

@@ -47,10 +47,10 @@ def matchfind():
 @app.route("/submitSurvey")
 def submitSurvey():
     surveyname = request.args.get('surveyname', '')
-    ans = request.args.get('ans', '')
+    ans = request.args.get('ans', '').split(",")
     username = session['user']
-    util.takeSurvey(surveyname, username, ans)
-    return True
+    print surveyname, ans, username
+    return util.takeSurvey(surveyname, username, ans)
 
 @app.route("/login",methods=["POST","GET"])
 def login():
@@ -172,6 +172,9 @@ def survey():
             return redirect(url_for("login"))
         return render_template("survey.html", surveynames = util.getSurveyNames())
     else:
+        button = request.form['button']
+        if button == "Submit":
+            return redirect(url_for("survey"))
         if request.form.has_key("tablogin"):
             return redirect(url_for("login"))
         if request.form.has_key("tabhome"):
