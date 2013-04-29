@@ -112,7 +112,8 @@ def results():
 @app.route("/getUserInfo")
 def getUserInfo():
     username = session["user"]
-    return json.dumps(util.getUserInfo(username))
+    print util.getUser(username)
+    return json.dumps(util.getUser(username))
 
 @app.route("/signup",methods=["POST","GET"])
 def signup():
@@ -122,10 +123,10 @@ def signup():
         if request.form.has_key("submitsignup"):
             user = str(request.form["Username"])
             password = str(request.form["Password"])
-            age = str(request.form["Username"])
-            realname = str(request.form["Username"])
-            gender = str(request.form["Username"])
-            hobbies = str(request.form["Username"])
+            age = str(request.form["Age"])
+            realname = str(request.form["RealName"])
+            gender = str(request.form["Gender"])
+            hobbies = str(request.form["Hobbies"])
             validate = util.createUser(user,password,age,realname,gender,hobbies)
             if validate == 0:
                 print "no"

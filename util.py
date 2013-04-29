@@ -123,9 +123,11 @@ def getSurveyNames():
 
 
 #not tested
-def getUserInfo(userName):
-    return users.find_one({'name':userName})
-
+def getUser(userName):
+    userInfo = dict(users.find_one({'user':userName}))
+    result = [userInfo[x] for x in userInfo]
+    return result[1:]
+    
 #not tested
 def editUserInfo(userName, fieldChange, newValue):
     pass
