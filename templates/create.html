@@ -6,6 +6,7 @@
 {% block tabs %}{{super()}}{% endblock %}
 {% block body %}
 <div class="content">
+<font color="#013F5C">
   <center>
     <h3>Matching with Vikings</h3>
     <div class="text">
@@ -14,7 +15,9 @@
   </center>
 </div>
 <form id="formcreate" action="" method="POST">
-      <input type="text" name="surveyname" class="" placeholder="Name Your Survey"></input>
+<font color="#013F5C" align="center">
+<div algin="center"><br>
+   Survey Name:<input type="text" name="surveyname" class="" placeholder="Name Your Survey"></input><br><br>
       <p>1. <input type="text" name="q1" placeholder="Question 1" >
       <input type="radio" name="q1type" value="number" checked="checked">number</input>
       <input type="radio" name="q1type" value="word">word</input>
@@ -29,8 +32,10 @@
       <input type="radio" name="q4type" value="word">word</input>
       <p>5. <input type="text" name="q5" placeholder="Question 5" >
       <input type="radio" name="q5type" value="number" checked="checked">number</input>
-      <input type="radio" name="q5type" value="word">word</input>      
+      <input type="radio" name="q5type" value="word">word</input> 
+<br><br>     
       <input class="button" type="submit" name="submitcreate" value="Create" class=""></input>
+</div>
 </form>
 
 <script src="/static/js/survey.js"></script>
