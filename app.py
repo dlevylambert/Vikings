@@ -115,18 +115,32 @@ def getUserInfo():
     print util.getUser(username)
     return json.dumps(util.getUser(username))
 
+@app.route("/getOtherInfo")
+def getOtherInfo():
+    otherUser = request.args.get("otherUser", "").strip()
+    print otherUser #to make sure we're looking for the right other user
+    return json.dumps(util.getUser(otherUser))
+
 @app.route("/signup",methods=["POST","GET"])
 def signup():
     if request.method=="GET":
         return render_template("signup.html")
     else:
+        # adding some testing functions for signing up users
+        # DK: UPDATE, 12:35 PM 4/30. Saving profiles works. For some reason, my dkurk account saved every field as 'dkurk' and I was worried but it looks like this was fixed along the way!
         if request.form.has_key("submitsignup"):
             user = str(request.form["Username"])
+            #print user
             password = str(request.form["Password"])
+            #print password
             age = str(request.form["Age"])
+            #print age
             realname = str(request.form["RealName"])
+            #print realname
             gender = str(request.form["Gender"])
+            #print gender
             hobbies = str(request.form["Hobbies"])
+            #print hobbies
             validate = util.createUser(user,password,age,realname,gender,hobbies)
             if validate == 0:
                 print "no"
@@ -153,12 +167,13 @@ def signup():
         if request.form.has_key("tabresults"):
             return redirect(url_for("results"))
 
-@app.route("/profile",methods=["POST","GET"])
-def profile():
+@app.route("/profile")
+@app.route("/profile/<user>",methods=["POST","GET"])
+def profile(user=None):
     if request.method=="GET":
         if 'user' not in session:
             return redirect(url_for("login"))
-        return render_template("profile.html")
+        return render_template("profile.html", user=user)
     else:
         if request.form.has_key("tablogin"):
             return redirect(url_for("login"))
@@ -174,6 +189,7 @@ def profile():
             return redirect(url_for("survey"))
         if request.form.has_key("tabresults"):
             return redirect(url_for("results"))
+        
 
 @app.route("/survey",methods=["POST","GET"])
 def survey():

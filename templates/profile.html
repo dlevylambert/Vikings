@@ -14,6 +14,15 @@
     </div>
   </center>
 </div>
+
+{% if user %}
+<h2>Looking at the profile of...</h2>
+<div id="anyUser">
+{{user}}
+</div>
+{% endif %}
+
+<h2>Logged in as...</h2>
 <div id="userInfo">
 </div>
 <script src="/static/js/profile.js"></script>
