@@ -145,7 +145,47 @@ def getUser(userName):
 #not tested
 def editUserInfo(userName, fieldChange, newValue):
     pass
+
+
+
+#add in a list of lists (ordered) of best to worst matches. is input for bestOverall. dictionarry of lists of lists
+#not done
+def bestOverall(dictionaryMatches):
+    #if odd numbered leave someone out
+    usersMatches = {}
+    matched = False 
+    for each person in dictionaryMatches:
+        usersMatches[person] = ""
+        finalMatches = []
+    return matchMethod(usersMatches, dictionaryMatches, finalMatches)
+
+
+def matchMethod(userMatches, dictionaryMatches, finalMatches):
+    if dictionaryMatches.keys().length == 0:
+        return finalMatches
+    else:
+        for person in dictionaryMatches:
+            if (usersMatches[person]=="" and usersMatches[dictionaryMatches[person][0]==""):
+                usersMatches[person]== dictionaryMatches[person][0]
+                usersMatches[dictionaryMatches[person][0]] = person
+            elif (usersMatches[person] == ""):
+                notMatched = False
+                while (notMatched):
+                #here need to check if the person i wanna assign is available to be assigned
+                    if usersMatches[dictionaryMatches[person]]:
+                          
+            
+                    switchStuff(dictionaryMatches[person][0], dictionaryMatches)
     
+#add to finalMatches
+#eliminate from dictionaryMatches
+#if dictionaryMatches is empty, return finalMatches
+#else recurse by calling matchMethod
+#base case of recursion, return finalMatches
+
+def switchStuff(person, dictionaryMatches):
+
+
 if __name__ == "__main__":
 #    createUser("Dina", "hello")
 #    print checkUserPass("Dina", "hello")
