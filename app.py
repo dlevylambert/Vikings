@@ -115,6 +115,12 @@ def getUserInfo():
     print util.getUser(username)
     return json.dumps(util.getUser(username))
 
+@app.route("/getOtherInfo")
+def getOtherInfo():
+    otherUser = request.args.get("otherUser", "").strip()
+    print otherUser #to make sure we're looking for the right other user
+    return json.dumps(util.getUser(otherUser))
+
 @app.route("/signup",methods=["POST","GET"])
 def signup():
     if request.method=="GET":
