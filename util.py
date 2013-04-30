@@ -109,6 +109,20 @@ def match(surveyName, user):
     
     return matchesData
 
+def sortPercentages(surveyname):
+    sorted = {}
+    thisSurvey = dict(surveys.find_one({'name':surveyname}))
+    unsorted = thisSurvey['userpercentages']
+    
+    for x in unsorted:
+        sorted[x] = [[unsorted[x][y], y] for y in unsorted[x]]
+    for x in sorted:
+        sorted[x].sort(reverse=True)
+    for x in sorted:
+        sorted[x] = [y[1] for y in sorted[x]]
+        return sorted
+                                                
+
 def getSurveyQs(surveyName):
     survey = dict(surveys.find_one({'name':surveyName}))
     qs = survey['questions']
@@ -123,9 +137,11 @@ def getSurveyNames():
 
 
 #not tested
-def getUserInfo(userName):
-    return users.find_one({'name':userName})
-
+def getUser(userName):
+    userInfo = dict(users.find_one({'user':userName}))
+    result = [userInfo[x] for x in userInfo]
+    return result[1:]
+    
 #not tested
 def editUserInfo(userName, fieldChange, newValue):
     pass
