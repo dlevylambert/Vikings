@@ -20,7 +20,7 @@ function loadNames() {
 	}
 	else {
 	    console.log("nope");
-	    $("#survey").append("<b>" + "NO MOVIES FOUND! GO BACK TO SEARCH AGAIN" + "</b>");
+	    $("#survey").append("<b>" + "No surveys currently exist" + "</b>");
 	}
 	$("#names").change(loadQuestions);	
     });
