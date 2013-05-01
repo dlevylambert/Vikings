@@ -111,6 +111,7 @@ def match(surveyName, user):
     matchesData[2] = [x for x in percents if percents[x] == matchesData[0]]
     matchesData[3] = [x for x in percents if percents[x] == matchesData[1]]
     matchesData[4] = []
+    #matchesData[4] = bestOverall(sortPercentages(surveyName))
     
     print matchesData
     return matchesData
