@@ -61,6 +61,7 @@ def createSurvey(name, questions):
 
 def deleteSurvey(name):
     surveys.remove({"name": name})
+    return True
 
 def findDiffs(surveyName, user):
     thisSurvey = dict(surveys.find_one({'name': surveyName}))
@@ -120,7 +121,7 @@ def sortPercentages(surveyname):
         sorted[x].sort(reverse=True)
     for x in sorted:
         sorted[x] = [y[1] for y in sorted[x]]
-        return sorted
+    return sorted
                                                 
 
 def getSurveyQs(surveyName):
@@ -202,4 +203,4 @@ if __name__ == "__main__":
 #    findDiffs('test', 'Helen')
 #    findPercents('test', 'Helen')
 #    match('test', 'Helen')
-    deleteSurvey("prom date")
+#    deleteSurvey("prom date")
