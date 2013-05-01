@@ -13,6 +13,7 @@ function loadNames() {
 		    $("#names").append('<option value="'+000+'">' + "Select a survey to see the results:" + '<\p>');
 		}
 		else {
+		    //check if user answered
 		    var item=$('<option value="'+data[i]+'">'+ data[i]+'</option>');
 		    $("#names").append(item);
 		}
@@ -32,7 +33,7 @@ function loadMatches(e) {
     surveyname = $(this).attr("value");
     console.log(surveyname);
     $.getJSON("/matchfind", {surveyname: surveyname}, function(data){
-        $("#matches").append("<b>" + "BEST: " + data['best'] + "<br>" + "WORST: " + data['worst'] + "</br></b>");
+        $("#matches").append("<b>" + "BEST: " + data[2] + "<br>" + "WORST: " + data[3] + "</br></b>");
 //data is matches
     });
 }

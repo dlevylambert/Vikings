@@ -71,11 +71,11 @@ def findDiffs(surveyName, user):
 
     for x in allUsers:
         if x != user:
-            diffs = [math.fabs(allUsers[x][i] - thisUser[i]) for i in range(0, len(thisUser))]
+            diffs = [math.fabs(ord(allUsers[x][i]) - ord(thisUser[i])) for i in range(0, len(thisUser))]
             thisSurvey['userdifferences'][user].update({x:sum(diffs)})
-            surveys.update(
-                {'name':surveyName},
-                thisSurvey)
+    surveys.update(
+        {'name':surveyName},
+        thisSurvey)
     return True    
 
 def findPercents(surveyName, user):
@@ -89,25 +89,30 @@ def findPercents(surveyName, user):
     for x in sumDiffs:
         percent = 100 - (sumDiffs[x] / maxDiff) * 100
         thisSurvey['userpercentages'][user].update({x:percent})
-        surveys.update(
-            {'name':surveyName},
-            thisSurvey)
+    
+    surveys.update(
+        {'name':surveyName},
+        thisSurvey)
+
     return True
 
 def match(surveyName, user):
     matchesData = {}
+    findDiffs(surveyName, user)
+    findPercents(surveyName, user)
     thisSurvey = dict(surveys.find_one({'name': surveyName}))
     percents = thisSurvey['userpercentages'][user]
-    
+   
     numQs = len(thisSurvey['useranswers'][user])
     maxDiff = 4.0 * numQs
-    matchesData['maxPercent'] = max(percents[x] for x in percents)
-    matchesData['minPercent'] = min(percents[x] for x in percents)
+    matchesData[0] = max(percents[x] for x in percents)
+    matchesData[1] = min(percents[x] for x in percents)
     
-    matchesData['best'] = [x for x in percents if percents[x] == matchesData['maxPercent']]
-    matchesData['worst'] = [x for x in percents if percents[x] == matchesData['minPercent']]
-    matchesData['overallBest'] = []
+    matchesData[2] = [x for x in percents if percents[x] == matchesData[0]]
+    matchesData[3] = [x for x in percents if percents[x] == matchesData[1]]
+    matchesData[4] = []
     
+    print matchesData
     return matchesData
 
 def sortPercentages(surveyname):
