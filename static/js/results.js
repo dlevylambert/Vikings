@@ -34,7 +34,14 @@ function loadMatches(e) {
     $("#matches").empty();
     $.getJSON("/matchfind", {surveyname: surveyname}, function(data){
 	$("#matches").append("</br>");
-	$("#matches").append("<b>" + "BEST: " +data[2].join(", ") + "<br>" + "WORST: " + data[3].join(", ") + "</br></b>");
-//data is matches
+	$("#matches").append("<b>" + "BEST: </b> ");
+	for (var i=0; i <data[2].length; i++) {
+	    $("#matches").append(data[2][i] + " profile: <a href='ml7.stuycs.org:6565/profile/'" + data[2][i] + "</a>" );
+	}
+	$("#matches").append("<b>" + "WORST: </b> ");
+	for (var i=0; i <data[3].length; i++) {
+	    $("#matches").append(data[2][i] + " profile: <a href='ml7.stuycs.org:6565/profile/'" + data[2][i] + "</a>" );
+	}
+	//data is matches
     });
 }
