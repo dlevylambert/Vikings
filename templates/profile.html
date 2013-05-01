@@ -9,20 +9,20 @@
    <font color="#013F5C">
   <center>
     <div class="text">
-      <strong><p>Welcome to your Profile.</p></strong>
+      <br><h2>Welcome to your Profile.</h2></br>
     </div>
   </center>
 </div>
 
 {% if user %}
-<h2>Looking at the profile of...</h2>
+<center>
+<br><b><font size="4">Looking at the profile of:</font></b>
 <div id="anyUser">
 {{user}}
 </div>
 {% endif %}
 
-<h2>Logged in as...</h2>
-<div id="userInfo">
+<br><b><font size="4">Logged in as:</font></b><div id="userInfo">
 </div>
 <script src="/static/js/profile.js"></script>
 {% endblock %}
