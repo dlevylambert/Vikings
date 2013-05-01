@@ -187,7 +187,7 @@ def bestOverall(dictionaryMatches):
 #def switchStuff(person, dictionaryMatches):
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
 #    createUser("Dina", "hello")
 #    print checkUserPass("Dina", "hello")
 #    print checkUserPass("Dina", "he")
