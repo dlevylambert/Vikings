@@ -21,7 +21,7 @@ function loadNames() {
 	}
 	else {
 	    console.log("nope");
-	    $("#matches").append("<b>" + "NO SERVEYS FOUND" + "</b>");
+	    $("#matches").append("<b>" + "NO SURVEYS FOUND" + "</b>");
 	}
 	$("#names").change(loadMatches);  
     });
