@@ -247,6 +247,4 @@ def create():
             return redirect(url_for('create'))
 
 if __name__ == "__main__":
-    #for each question, list format is [question, question type: either number or word]
-    app.run(debug=True, port=6565)
-    util.createSurvey('roommate', [['How much of a night owl are you?', 'number'],['On a scale of 1 to 5, how quiet do you want your room to be?', 'number'],['How much to you agree with the following statement: I will spend most of my free time in my room.', 'word'],['How much to you agree with the following statement: " always have friends over.', 'word'],['How much do you agree with the following statement: I need my room to be clean and organized.', 'word']])
+    app.run(host='0.0.0.0',port=6565)
