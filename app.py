@@ -112,7 +112,6 @@ def results():
 @app.route("/getUserInfo")
 def getUserInfo():
     username = session["user"]
-    print util.getUser(username)
     return json.dumps(util.getUser(username))
 
 @app.route("/getOtherInfo")
@@ -167,13 +166,13 @@ def signup():
         if request.form.has_key("tabresults"):
             return redirect(url_for("results"))
 
-@app.route("/profile")
+@app.route("/profile",methods=["POST","GET"])
 @app.route("/profile/<user>",methods=["POST","GET"])
-def profile(user=None):
+def profile():
     if request.method=="GET":
         if 'user' not in session:
             return redirect(url_for("login"))
-        return render_template("profile.html", user=user)
+        return render_template("profile.html", user=session['user'])
     else:
         if request.form.has_key("tablogin"):
             return redirect(url_for("login"))
@@ -198,9 +197,6 @@ def survey():
             return redirect(url_for("login"))
         return render_template("survey.html", surveynames = util.getSurveyNames())
     else:
-        button = request.form['button']
-        if button == "Submit":
-            return redirect(url_for("survey"))
         if request.form.has_key("tablogin"):
             return redirect(url_for("login"))
         if request.form.has_key("tabhome"):
@@ -215,6 +211,9 @@ def survey():
             return redirect(url_for("survey"))
         if request.form.has_key("tabresults"):
             return redirect(url_for("results"))
+        if request.form.has_key("Submit"):
+            return redirect(url_for("survey"))
+
 
 @app.route("/create",methods=["POST","GET"])
 def create():
