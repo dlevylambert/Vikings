@@ -7,7 +7,6 @@ $(document).ready(function(){
 function loadNames() {
     $.getJSON("/getnames", function(data){
 	$("#names").empty();
-
 	if (data.length > 0) {
             for (var i = -1; i < data.length; i++){
 		if (i == -1) {
