@@ -168,11 +168,12 @@ def signup():
 
 @app.route("/profile",methods=["POST","GET"])
 @app.route("/profile/<user>",methods=["POST","GET"])
-def profile():
+def profile(user=None):
     if request.method=="GET":
         if 'user' not in session:
             return redirect(url_for("login"))
-        return render_template("profile.html", user=session['user'])
+        #return render_template("profile.html", user=session['user'])
+        return render_template("profile.html", user=user)
     else:
         if request.form.has_key("tablogin"):
             return redirect(url_for("login"))
