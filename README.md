@@ -10,6 +10,11 @@ Group Members
 * Shreya Kalva
 
 
+PROJECT RUNNING ON: <a href="http://ml7.stuycs.org:6565/home">
+project</a>
+
+
+
 For Friday April 5th:
 * login stuff? with encripted password perhaps?
 * basic templates
