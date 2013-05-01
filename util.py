@@ -7,6 +7,7 @@ import random
 import math
 from pymongo import Connection
 from gridfs import GridFS
+from collections import defaultdict
 
 connection = Connection('mongo2.stuycs.org')
 db = connection.admin
@@ -153,45 +154,67 @@ def getUser(userName):
 def editUserInfo(userName, fieldChange, newValue):
     pass
 
+#overall best, does nto work
+def overallBest(ordered):
+    final = temp = {}
+	temp = defaultdict(lambda:"")
+	return recurseOverall(ordered, temp, final)
 
+def recurseOverall(ordered, temp, final):
+    if (len(ordered.keys()) == 0):
+        return final
+    for x in ordered:
+        y = temp[x]
+        if (temp[x] == ""):
+            coupleUp(ordered, temp, x, '')
+        elif (ordered[x].index(y) != 0):
+            if not coupleUp(ordered, temp, x, y):
+				finalize(ordered, temp, final, x, y)
+        else:
+			finalize(ordered, temp, final, x, y)
+            break
+    return recurseOverall(ordered, temp, final)
+	
+def coupleUp(ordered, temp, x, stop):
+    for y in ordered[x]:
+        if (y == stop):
+            return False
+        elif (temp[y] == ""):
+            if (temp[temp[x]] != ""):
+                temp.pop(temp[x], None)
+            temp[x] = y
+            temp[y] = x
+            return True
+        else:
+            if(ordered[y].index(x) > ordered[y].index(temp[y])):
+                temp.pop(temp[y], None)
+                temp[x] = y
+                temp[y] = x
+                return True
 
-#add in a list of lists (ordered) of best to worst matches. is input for bestOverall. dictionarry of lists of lists
-#not done
-def bestOverall(dictionaryMatches):
-    #if odd numbered leave someone out
-    usersMatches = {}
-    matched = False 
-    for person in dictionaryMatches:
-        usersMatches[person] = ""
-        finalMatches = []
-    return matchMethod(usersMatches, dictionaryMatches, finalMatches)
+def finalize(ordered, temp, final, x, y):
+    final[x] = y
+    final[y] = x
+    removeMatchedUser(ordered, temp, x)
+    removeMatchedUser(ordered, temp, y)
 
+def removeMatchedUser(ordered, temp, username):
+	ordered.pop(username, None)
+	for x in ordered:
+		for y in ordered[x]:
+			if y == username:
+				ordered[x].remove(y)
 
-#def matchMethod(userMatches, dictionaryMatches, finalMatches):
-#    if dictionaryMatches.keys().length == 0:
-#        return finalMatches
-#    else:
-#        for person in dictionaryMatches:
-#            if (usersMatches[person]=="" and usersMatches[dictionaryMatches[pe#rson][0]==""):
-#                usersMatches[person]== dictionaryMatches[person][0]
-#                usersMatches[dictionaryMatches[person][0]] = person
-#            elif (usersMatches[person] == ""):
-#                notMatched = False
-#                while (notMatched):
-                #here need to check if the person i wanna assign is available to be assigned
-#                    if usersMatches[dictionaryMatches[person]]:
-                          
-            
- #                   switchStuff(dictionaryMatches[person][0], dictionaryMatches)
-    
-#add to finalMatches
-#eliminate from dictionaryMatches
-#if dictionaryMatches is empty, return finalMatches
-#else recurse by calling matchMethod
-#base case of recursion, return finalMatches
+	for x in temp:
+		if temp[x] == username:
+			temp[x] = ""
 
-#def switchStuff(person, dictionaryMatches):
-
+ordered = {'helen':['dina', 'shreya', 'david'],
+    	'dina':['david', 'helen', 'shreya'],
+		'shreya':['helen', 'david', 'dina'],
+		'david':['shreya', 'dina', 'helen']
+		}
+print overallBest(ordered)
 
 #if __name__ == "__main__":
 #    createUser("Dina", "hello")
