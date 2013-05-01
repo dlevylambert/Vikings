@@ -31,9 +31,10 @@ function loadNames() {
 
 function loadMatches(e) {
     surveyname = $(this).attr("value");
-    console.log(surveyname);
+    $("#matches").empty();
     $.getJSON("/matchfind", {surveyname: surveyname}, function(data){
-        $("#matches").append("<b>" + "BEST: " + data[2] + "<br>" + "WORST: " + data[3] + "</br></b>");
+	$("#matches").append("</br>");
+	$("#matches").append("<b>" + "BEST: " +data[2].join(", ") + "<br>" + "WORST: " + data[3].join(", ") + "</br></b>");
 //data is matches
     });
 }
