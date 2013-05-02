@@ -72,6 +72,7 @@ def findDiffs(surveyName, user):
     thisSurvey['userdifferences'][user] = {}
 
     for x in allUsers:
+
         if x != user:
             diffs = [math.fabs(ord(allUsers[x][i]) - ord(thisUser[i])) for i in range(0, len(thisUser))]
             thisSurvey['userdifferences'][user].update({x:sum(diffs)})
@@ -115,7 +116,7 @@ def match(surveyName, user):
     
     matchesData[2] = [x for x in percents if percents[x] == matchesData[0]]
     matchesData[3] = [x for x in percents if percents[x] == matchesData[1]]
-    #matchesData[4] = tracePaths(surveyName, user)
+    matchesData[4] = tracePaths(surveyName, user)
     
     print matchesData
     return matchesData
@@ -126,19 +127,21 @@ def tracePaths(surveyname, username):
     allPercents = thisSurvey['userpercentages']
     allPaths = []
     allMatches = []
-    recursePaths(allPercents, 0, {}, allPaths, allMatches)
+    recursePaths(username, allPercents, 0, {}, allPaths, allMatches)
     bestPath = max(allPaths)
     bestMatches = [allMatches[i] for i in range(0, len(allPaths)) if allPaths[i] == bestPath ]
     print bestMatches
     return [x[username] for x in bestMatches]
 	
-def recursePaths(allPers, sum, matches, allPaths, allMatches):
+def recursePaths(username, allPers, sum, matches, allPaths, allMatches):
     if (len(allPers.keys()) < 2):
         allPaths.append(sum)
         allMatches.append(matches)
         return
-		
-    currUser = allPers.keys()[0]
+    if sum == 0:
+        currUser = username
+    else:
+        currUser = allPers.keys()[0]
     for x in allPers[currUser]:
         ap = copy.deepcopy(allPers)
         ap.pop(currUser, None)
@@ -151,7 +154,7 @@ def recursePaths(allPers, sum, matches, allPaths, allMatches):
         m[currUser] = x
         m[x] = currUser
 		
-        recursePaths(ap, sum + allPers[currUser][x], m, allPaths, allMatches)
+        recursePaths(username, ap, sum + allPers[currUser][x], m, allPaths, allMatches)
 
 
 def getSurveyQs(surveyName):
