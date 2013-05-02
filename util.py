@@ -5,6 +5,7 @@ import time
 import base64
 import random
 import math
+import copy
 from pymongo import Connection
 from gridfs import GridFS
 from collections import defaultdict
@@ -111,8 +112,7 @@ def match(surveyName, user):
     
     matchesData[2] = [x for x in percents if percents[x] == matchesData[0]]
     matchesData[3] = [x for x in percents if percents[x] == matchesData[1]]
-    matchesData[4] = []
-    #matchesData[4] = bestOverall(sortPercentages(surveyName))
+    matchesData[4] = tracePaths(user)
     
     print matchesData
     return matchesData
@@ -214,7 +214,44 @@ ordered = {'helen':['dina', 'shreya', 'david'],
 		'shreya':['helen', 'david', 'dina'],
 		'david':['shreya', 'dina', 'helen']
 		}
-print overallBest(ordered)
+
+#overall best, another way, works
+def tracePaths(username):
+	#set allPercents to database 
+    allPercents = {'helen':{'dina':90, 'shreya':80, 'david':50},
+                   'dina':{'helen':80, 'shreya':70, 'david':50},
+                   'shreya':{'dina':90, 'helen':100, 'david':50},
+                   'david':{'dina':90, 'helen':100, 'shreya':50}}
+    allPaths = []
+    allMatches = []
+    recursePaths(allPercents, 0, {}, allPaths, allMatches)
+    bestPath = max(allPaths)
+    bestMatches = [allMatches[i] if allPaths[i] == bestpath for i in range(0, len(allPaths))]
+    return [bestMatches[x][username] for x in bestMatches]
+	
+def recursePaths(allPers, sum, matches, allPaths, allMatches):
+    if (len(allPers.keys()) < 2):
+        allPaths.append(sum)
+        allMatches.append(matches)
+        return
+		
+    currUser = allPers.keys()[0]
+    for x in allPers[currUser]:
+        ap = copy.deepcopy(allPers)
+        ap.pop(currUser, None)
+        ap.pop(x, None)
+        for y in ap:
+            ap[y].pop(currUser, None)
+            ap[y].pop(x, None)
+			
+        m = copy.deepcopy(matches)
+        m[currUser] = x
+        m[x] = currUser
+		
+        recursePaths(ap, sum + allPers[currUser][x], m, allPaths, allMatches)
+
+tracePaths('helen')
+
 
 #if __name__ == "__main__":
 #    createUser("Dina", "hello")
