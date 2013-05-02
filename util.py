@@ -5,8 +5,10 @@ import time
 import base64
 import random
 import math
+import copy
 from pymongo import Connection
 from gridfs import GridFS
+from collections import defaultdict
 
 connection = Connection('mongo2.stuycs.org')
 db = connection.admin
@@ -110,8 +112,7 @@ def match(surveyName, user):
     
     matchesData[2] = [x for x in percents if percents[x] == matchesData[0]]
     matchesData[3] = [x for x in percents if percents[x] == matchesData[1]]
-    matchesData[4] = []
-    #matchesData[4] = bestOverall(sortPercentages(surveyName))
+    matchesData[4] = tracePaths(user)
     
     print matchesData
     return matchesData
@@ -153,44 +154,103 @@ def getUser(userName):
 def editUserInfo(userName, fieldChange, newValue):
     pass
 
+#overall best, does nto work
+def overallBest(ordered):
+    final = temp = {}
+	temp = defaultdict(lambda:"")
+	return recurseOverall(ordered, temp, final)
 
+def recurseOverall(ordered, temp, final):
+    if (len(ordered.keys()) == 0):
+        return final
+    for x in ordered:
+        y = temp[x]
+        if (temp[x] == ""):
+            coupleUp(ordered, temp, x, '')
+        elif (ordered[x].index(y) != 0):
+            if not coupleUp(ordered, temp, x, y):
+				finalize(ordered, temp, final, x, y)
+        else:
+			finalize(ordered, temp, final, x, y)
+            break
+    return recurseOverall(ordered, temp, final)
+	
+def coupleUp(ordered, temp, x, stop):
+    for y in ordered[x]:
+        if (y == stop):
+            return False
+        elif (temp[y] == ""):
+            if (temp[temp[x]] != ""):
+                temp.pop(temp[x], None)
+            temp[x] = y
+            temp[y] = x
+            return True
+        else:
+            if(ordered[y].index(x) > ordered[y].index(temp[y])):
+                temp.pop(temp[y], None)
+                temp[x] = y
+                temp[y] = x
+                return True
 
-#add in a list of lists (ordered) of best to worst matches. is input for bestOverall. dictionarry of lists of lists
-#not done
-def bestOverall(dictionaryMatches):
-    #if odd numbered leave someone out
-    usersMatches = {}
-    matched = False 
-    for person in dictionaryMatches:
-        usersMatches[person] = ""
-        finalMatches = []
-    return matchMethod(usersMatches, dictionaryMatches, finalMatches)
+def finalize(ordered, temp, final, x, y):
+    final[x] = y
+    final[y] = x
+    removeMatchedUser(ordered, temp, x)
+    removeMatchedUser(ordered, temp, y)
 
+def removeMatchedUser(ordered, temp, username):
+	ordered.pop(username, None)
+	for x in ordered:
+		for y in ordered[x]:
+			if y == username:
+				ordered[x].remove(y)
 
-#def matchMethod(userMatches, dictionaryMatches, finalMatches):
-#    if dictionaryMatches.keys().length == 0:
-#        return finalMatches
-#    else:
-#        for person in dictionaryMatches:
-#            if (usersMatches[person]=="" and usersMatches[dictionaryMatches[pe#rson][0]==""):
-#                usersMatches[person]== dictionaryMatches[person][0]
-#                usersMatches[dictionaryMatches[person][0]] = person
-#            elif (usersMatches[person] == ""):
-#                notMatched = False
-#                while (notMatched):
-                #here need to check if the person i wanna assign is available to be assigned
-#                    if usersMatches[dictionaryMatches[person]]:
-                          
-            
- #                   switchStuff(dictionaryMatches[person][0], dictionaryMatches)
-    
-#add to finalMatches
-#eliminate from dictionaryMatches
-#if dictionaryMatches is empty, return finalMatches
-#else recurse by calling matchMethod
-#base case of recursion, return finalMatches
+	for x in temp:
+		if temp[x] == username:
+			temp[x] = ""
 
-#def switchStuff(person, dictionaryMatches):
+ordered = {'helen':['dina', 'shreya', 'david'],
+    	'dina':['david', 'helen', 'shreya'],
+		'shreya':['helen', 'david', 'dina'],
+		'david':['shreya', 'dina', 'helen']
+		}
+
+#overall best, another way, works
+def tracePaths(username):
+	#set allPercents to database 
+    allPercents = {'helen':{'dina':90, 'shreya':80, 'david':50},
+                   'dina':{'helen':80, 'shreya':70, 'david':50},
+                   'shreya':{'dina':90, 'helen':100, 'david':50},
+                   'david':{'dina':90, 'helen':100, 'shreya':50}}
+    allPaths = []
+    allMatches = []
+    recursePaths(allPercents, 0, {}, allPaths, allMatches)
+    bestPath = max(allPaths)
+    bestMatches = [allMatches[i] if allPaths[i] == bestpath for i in range(0, len(allPaths))]
+    return [bestMatches[x][username] for x in bestMatches]
+	
+def recursePaths(allPers, sum, matches, allPaths, allMatches):
+    if (len(allPers.keys()) < 2):
+        allPaths.append(sum)
+        allMatches.append(matches)
+        return
+		
+    currUser = allPers.keys()[0]
+    for x in allPers[currUser]:
+        ap = copy.deepcopy(allPers)
+        ap.pop(currUser, None)
+        ap.pop(x, None)
+        for y in ap:
+            ap[y].pop(currUser, None)
+            ap[y].pop(x, None)
+			
+        m = copy.deepcopy(matches)
+        m[currUser] = x
+        m[x] = currUser
+		
+        recursePaths(ap, sum + allPers[currUser][x], m, allPaths, allMatches)
+
+tracePaths('helen')
 
 
 #if __name__ == "__main__":
