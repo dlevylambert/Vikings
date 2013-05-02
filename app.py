@@ -42,6 +42,7 @@ def getnames():
 def matchfind():
     surveyname = request.args.get('surveyname', '') #write JS method for this
     username = session['user']
+    print surveyname, username
     return json.dumps(util.match(surveyname, username))
 
 @app.route("/submitSurvey")
@@ -247,4 +248,4 @@ def create():
             return redirect(url_for('create'))
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=6565)
+    app.run(host='0.0.0.0', port=6565)

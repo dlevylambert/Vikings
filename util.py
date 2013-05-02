@@ -100,11 +100,14 @@ def findPercents(surveyName, user):
 
 def match(surveyName, user):
     matchesData = {}
-    findDiffs(surveyName, user)
-    findPercents(surveyName, user)
     thisSurvey = dict(surveys.find_one({'name': surveyName}))
+    for x in thisSurvey['useranswers']:
+        findDiffs(surveyName, x)
+        findPercents(surveyName, x)
     percents = thisSurvey['userpercentages'][user]
-   
+
+    print thisSurvey
+
     numQs = len(thisSurvey['useranswers'][user])
     maxDiff = 4.0 * numQs
     matchesData[0] = max(percents[x] for x in percents)
@@ -112,122 +115,22 @@ def match(surveyName, user):
     
     matchesData[2] = [x for x in percents if percents[x] == matchesData[0]]
     matchesData[3] = [x for x in percents if percents[x] == matchesData[1]]
-    matchesData[4] = tracePaths(user)
+    matchesData[4] = tracePaths(surveyName, user)
     
     print matchesData
     return matchesData
 
-def sortPercentages(surveyname):
-    sorted = {}
+
+def tracePaths(surveyname, username):
     thisSurvey = dict(surveys.find_one({'name':surveyname}))
-    unsorted = thisSurvey['userpercentages']
-    
-    for x in unsorted:
-        sorted[x] = [[unsorted[x][y], y] for y in unsorted[x]]
-    for x in sorted:
-        sorted[x].sort(reverse=True)
-    for x in sorted:
-        sorted[x] = [y[1] for y in sorted[x]]
-    return sorted
-                                                
-
-def getSurveyQs(surveyName):
-    survey = dict(surveys.find_one({'name':surveyName}))
-    qs = survey['questions']
-    return qs
-
-#not tested
-def getSurveyNames():
-    names = []
-    for surv in surveys.find({"type": "survey"}):
-        names.append(surv["name"])
-    return names
-
-
-#not tested
-def getUser(userName):
-    userInfo = dict(users.find_one({'user':userName}))
-    result = [userInfo[x] for x in userInfo]
-    return result[1:]
-    
-#not tested
-def editUserInfo(userName, fieldChange, newValue):
-    pass
-
-#overall best, does nto work
-def overallBest(ordered):
-    final = temp = {}
-	temp = defaultdict(lambda:"")
-	return recurseOverall(ordered, temp, final)
-
-def recurseOverall(ordered, temp, final):
-    if (len(ordered.keys()) == 0):
-        return final
-    for x in ordered:
-        y = temp[x]
-        if (temp[x] == ""):
-            coupleUp(ordered, temp, x, '')
-        elif (ordered[x].index(y) != 0):
-            if not coupleUp(ordered, temp, x, y):
-				finalize(ordered, temp, final, x, y)
-        else:
-			finalize(ordered, temp, final, x, y)
-            break
-    return recurseOverall(ordered, temp, final)
-	
-def coupleUp(ordered, temp, x, stop):
-    for y in ordered[x]:
-        if (y == stop):
-            return False
-        elif (temp[y] == ""):
-            if (temp[temp[x]] != ""):
-                temp.pop(temp[x], None)
-            temp[x] = y
-            temp[y] = x
-            return True
-        else:
-            if(ordered[y].index(x) > ordered[y].index(temp[y])):
-                temp.pop(temp[y], None)
-                temp[x] = y
-                temp[y] = x
-                return True
-
-def finalize(ordered, temp, final, x, y):
-    final[x] = y
-    final[y] = x
-    removeMatchedUser(ordered, temp, x)
-    removeMatchedUser(ordered, temp, y)
-
-def removeMatchedUser(ordered, temp, username):
-	ordered.pop(username, None)
-	for x in ordered:
-		for y in ordered[x]:
-			if y == username:
-				ordered[x].remove(y)
-
-	for x in temp:
-		if temp[x] == username:
-			temp[x] = ""
-
-ordered = {'helen':['dina', 'shreya', 'david'],
-    	'dina':['david', 'helen', 'shreya'],
-		'shreya':['helen', 'david', 'dina'],
-		'david':['shreya', 'dina', 'helen']
-		}
-
-#overall best, another way, works
-def tracePaths(username):
-	#set allPercents to database 
-    allPercents = {'helen':{'dina':90, 'shreya':80, 'david':50},
-                   'dina':{'helen':80, 'shreya':70, 'david':50},
-                   'shreya':{'dina':90, 'helen':100, 'david':50},
-                   'david':{'dina':90, 'helen':100, 'shreya':50}}
+    allPercents = thisSurvey['userpercentages']
     allPaths = []
     allMatches = []
     recursePaths(allPercents, 0, {}, allPaths, allMatches)
     bestPath = max(allPaths)
-    bestMatches = [allMatches[i] if allPaths[i] == bestpath for i in range(0, len(allPaths))]
-    return [bestMatches[x][username] for x in bestMatches]
+    bestMatches = [allMatches[i] for i in range(0, len(allPaths)) if allPaths[i] == bestPath ]
+    print bestMatches
+    return [x[username] for x in bestMatches]
 	
 def recursePaths(allPers, sum, matches, allPaths, allMatches):
     if (len(allPers.keys()) < 2):
@@ -250,7 +153,28 @@ def recursePaths(allPers, sum, matches, allPaths, allMatches):
 		
         recursePaths(ap, sum + allPers[currUser][x], m, allPaths, allMatches)
 
-tracePaths('helen')
+
+def getSurveyQs(surveyName):
+    survey = dict(surveys.find_one({'name':surveyName}))
+    qs = survey['questions']
+    return qs
+
+#not tested
+def getSurveyNames():
+    names = []
+    for surv in surveys.find({"type": "survey"}):
+        names.append(surv["name"])
+    return names
+
+
+def getUser(userName):
+    userInfo = dict(users.find_one({'user':userName}))
+    result = [userInfo[x] for x in userInfo]
+    return result[1:]
+
+def editUserInfo(userName, fieldChange, newValue):
+    pass
+
 
 
 #if __name__ == "__main__":
