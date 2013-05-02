@@ -100,9 +100,10 @@ def findPercents(surveyName, user):
 
 def match(surveyName, user):
     matchesData = {}
-    findDiffs(surveyName, user)
-    findPercents(surveyName, user)
     thisSurvey = dict(surveys.find_one({'name': surveyName}))
+    for x in thisSurvey['useranswers']:
+        findDiffs(surveyName, x)
+        findPercents(surveyName, x)
     percents = thisSurvey['userpercentages'][user]
    
     numQs = len(thisSurvey['useranswers'][user])
