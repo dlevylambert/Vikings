@@ -213,9 +213,6 @@ def survey():
             return redirect(url_for("survey"))
         if request.form.has_key("tabresults"):
             return redirect(url_for("results"))
-        if request.form.has_key("Submit"):
-            return redirect(url_for("survey"))
-
 
 @app.route("/create",methods=["POST","GET"])
 def create():
@@ -248,4 +245,4 @@ def create():
             return redirect(url_for('create'))
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=6565)
+    app.run(debug=True, port=6565)
