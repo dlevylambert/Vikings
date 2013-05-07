@@ -37,11 +37,11 @@ def takeSurvey(surveyname, user, ans):
     print allAnswers
     return True
 
-def createUser(user,password,age,realname,gender,hobbies):
+def createUser(user,password,age,realname,gender,hobbies,youtube):
     if users.find_one({"user" : user}) != None:
         return False
     tmp = base64.b64encode(password)
-    newuser = {"user" : user, "pass" : tmp, "age": age, "realname":realname, "gender":gender, "hobbies": hobbies}
+    newuser = {"user" : user, "pass" : tmp, "age": age, "realname":realname, "gender":gender, "hobbies": hobbies, "youtube":youtube}
     users.insert(newuser)
     return True
 
