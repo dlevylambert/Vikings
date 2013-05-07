@@ -227,6 +227,16 @@ def survey():
             return redirect(url_for("survey"))
         if request.form.has_key("tabresults"):
             return redirect(url_for("results"))
+        if request.form.has_key("submitSurvey"):
+            sname = request.form['sname']
+            username = session['user']
+            ans = []
+            #change to correct question number
+            for i in range (0, 5):
+                ans.append(request.form[str(i)])
+            print sname, username, ans    
+            util.takeSurvey(sname, username, ans)
+            return redirect(url_for("results"))
 
 @app.route("/create",methods=["POST","GET"])
 def create():
@@ -259,4 +269,4 @@ def create():
             return redirect(url_for('create'))
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=6565)
+    app.run(debug=True, port=6565)

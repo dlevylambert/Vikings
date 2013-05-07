@@ -34,6 +34,7 @@ function loadQuestions(e) {
     var prefs = ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"];
     
     $("#survey").empty();
+    $("#survey").append('<input type="text" name="sname" value="'+surveyname+'"></input>');
     $("#survey").append('</br>');
     $.getJSON("/getquestions", {surveyname: surveyname}, function(data){
 	for (var i = 0; i < data.length; i++){
@@ -56,8 +57,8 @@ function loadQuestions(e) {
 	    }
 	    $("#survey").append('</br></br>');
 	    if (i == data.length - 1){
-		$("#survey").append('<button id="submitIt" type="submit" >Submit</button>');
-		$("#submitIt").click(submitSurvey);
+		$("#survey").append('<button id="submitIt" name="submitSurvey" type="submit" >Submit</button>');
+		//$("#submitIt").click(submitSurvey);
 	    }
 	}	
     });
