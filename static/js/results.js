@@ -40,11 +40,11 @@ function loadMatches(e) {
 	}
 	$("#matches").append("<b>" + "WORST: </b> ");
 	for (var i=0; i <data[3].length; i++) {
-	    $("#matches").append(data[3][i] + " profile: <a href='ml7.stuycs.org:6565/profile/" + data[2][i]+ "'>link to profile" + "</a>" );
+	    $("#matches").append(data[3][i] + " profile: <a href='../profile/" + data[2][i]+ "'>link to profile " + "</a>" );
 	}
 	$("#matches").append("<b>" + "OVERALL BEST: </b> ");
 	for (var i=0; i <data[4].length; i++) {
-	    $("#matches").append(data[4][i] + " profile: <a href='ml7.stuycs.org:6565/profile/" + data[2][i]+ "'>link to profile" + "</a>" );
+	    $("#matches").append(data[4][i] + " profile: <a href='../profile/" + data[2][i]+ "'>link to profile " + "</a>" );
 	}
 	//data is matches
     });
