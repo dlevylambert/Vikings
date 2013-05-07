@@ -142,16 +142,20 @@ def signup():
             hobbies = str(request.form["Hobbies"])
             #print hobbies
             youtube = str(request.form["Youtube"])
-            reached = False
-            youtubeID=""
-            for letter in youtube:
-                if (reached):
-                    youtubeID+=letter
-                a = ""
-                a = youtube[i]+youtube[i+1]+youtube[i+2]+youtube[i+3]+youtube[i+4]
-                if a == "ch?v=":
-                    reached = True
-            validate = util.createUser(user,password,age,realname,gender,hobbies,youtubeID)
+            print youtube
+            #reached = False
+            #youtubeID=""
+            #for letter in youtube:
+            #    if (reached):
+            #        youtubeID+=letter
+            #    a = ""
+            #    a = youtube[i]+youtube[i+1]+youtube[i+2]+youtube[i+3]+youtube[i+4]
+            #    if a == "ch?v=":
+            #        reached = True
+            #if (reached == False):
+            #    youtubeID="9ZEURntrQOg"
+            validate = util.createUser(user,password,age,realname,gender,hobbies)
+            #validate = util.createUser(user,password,age,realname,gender,hobbies,youtubeID)
             if validate == 0:
                 print "no"
                 return render_template("signup.html", failure = True)
