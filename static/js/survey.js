@@ -56,8 +56,8 @@ function loadQuestions(e) {
 	    }
 	    $("#survey").append('</br></br>');
 	    if (i == data.length - 1){
-		$("#survey").append('<button id="submitSurvey" type="submit" >Submit</button>');
-		$("#submitSurvey").click(submitSurvey);
+		$("#survey").append('<button id="submitIt" type="submit" >Submit</button>');
+		$("#submitIt").click(submitSurvey);
 	    }
 	}	
     });
