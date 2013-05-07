@@ -37,7 +37,7 @@ def takeSurvey(surveyname, user, ans):
     print allAnswers
     return True
 
-def createUser(user,password,age,realname,gender,hobbies,youtube):
+def createUser(user,password,age,realname,gender,hobbies):
     if users.find_one({"user" : user}) != None:
         return False
     tmp = base64.b64encode(password)
