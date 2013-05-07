@@ -142,15 +142,15 @@ def signup():
             hobbies = str(request.form["Hobbies"])
             #print hobbies
             youtube = str(request.form["Youtube"])
-            youtubeIndex=0
+            reached = False
             youtubeID=""
-            for (int i = 0; i<youtube.length(); i++):
+            for letter in youtube:
+                if (reached):
+                    youtubeID+=letter
                 a = ""
                 a = youtube[i]+youtube[i+1]+youtube[i+2]+youtube[i+3]+youtube[i+4]
                 if a == "ch?v=":
-                    youtubeIndex=i+5
-            for (i = youtubeIndex; i<youtube.length; i++)
-                youtubeID+=youtube[i]
+                    reached = True
             validate = util.createUser(user,password,age,realname,gender,hobbies,youtubeID)
             if validate == 0:
                 print "no"
