@@ -15,8 +15,8 @@ function loadMyProfile() {
 	$("#userInfo").append('<p>'+'<b> Favorite song: </b></p>');
 	var params = { allowScriptAccess: "always" };
 	var atts = { id: "myytplayer" };
-	$("#myytplayer").attr('data', "http://www.youtube.com/v/" + data[4] + "?enablejsapi=1&playerapiid=ytplayer&version=3");
-	var url = "http://www.youtube.com/v/" + data[4] + "?enablejsapi=1&playerapiid=ytplayer&version=3";
+	$("#myytplayer").attr('data', "http://www.youtube.com/v/" + "9ZEURntrQOg" + "?enablejsapi=1&playerapiid=ytplayer&version=3");
+	var url = "http://www.youtube.com/v/" + "9ZEURntrQOg" + "?enablejsapi=1&playerapiid=ytplayer&version=3";
 	swfobject.embedSWF(url,"ytapiplayer1","425", "356", "8", null, null, params, atts);
     }); 
 }
@@ -34,9 +34,9 @@ function loadOtherProfile() {
 	$("#anyUser").append('<p>'+'<b> Age: </b>'+data[3]+'</p>');
 	$("#anyUser").append('<p>'+'<b> Favorite song: </b></p>');
 	var params = { allowScriptAccess: "always" };
-	var atts = { id: "myytplayer" };
-	$("#myytplayer").attr('data', "http://www.youtube.com/v/" + data[4] + "?enablejsapi=1&playerapiid=ytplayer&version=3");
-	var url = "http://www.youtube.com/v/" + data[4] + "?enablejsapi=1&playerapiid=ytplayer&version=3";
+	var atts = { id: "myytplayer1" };
+	$("#myytplayer1").attr('data', "http://www.youtube.com/v/" + "9ZEURntrQOg" + "?enablejsapi=1&playerapiid=ytplayer&version=3");
+	var url = "http://www.youtube.com/v/" + "9ZEURntrQOg" + "?enablejsapi=1&playerapiid=ytplayer&version=3";
 	swfobject.embedSWF(url,"ytapiplayer2","425", "356", "8", null, null, params, atts);
     });
 }
