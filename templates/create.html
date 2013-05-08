@@ -7,34 +7,32 @@
 {% block body %}
 <div class="content">
 <font color="#013F5C">
-  <center>
-    <div class="text">
-      <br><h2>Create Your Own Survey!</h2></br>
+    <div class="text" align="center">
+      <h2>Create Your Own Survey!</h2>
     </div>
-  </center>
 </div>
 <form id="formcreate" action="" method="POST">
 <font color="#013F5C" align="center">
 <div algin="center"><br>
-   Survey Name:<input type="text" size="25" style="height:2em;line-height:1.5em;" name="surveyname" class="" placeholder="Name Your Survey"></input><br><br>
+   Survey Name:<input type="text" size="25" style="height:2em;line-height:1.5em;" name="surveyname" class="button pink" placeholder="Name Your Survey"></input><br><br>
 Write questions for your survey below, and indicate whether the answer should be in number form (from 1-5) or word form (Strongly Disagree-Strongly Agree).<br><br>
-      <p>1. <input type="text" name="q1" placeholder="Question 1" size="80" style="height:2em;line-height:1.5em;" >
+      <p>1. <input type="text" name="q1" class="button magenta" placeholder="Question 1" size="80" style="height:2em;line-height:1.5em;" >
       <input type="radio" name="q1type" value="number" checked="checked">number</input>
       <input type="radio" name="q1type" value="word">word</input><br><br>
-      <p>2. <input type="text" name="q2" placeholder="Question 2" size="80" style="height:2em;line-height:1.5em;" >
+      <p>2. <input type="text" name="q2" class="button magenta" placeholder="Question 2" size="80" style="height:2em;line-height:1.5em;" >
       <input type="radio" name="q2type" value="number" checked="checked">number</input>
       <input type="radio" name="q2type" value="word">word</input><br><br>
-      <p>3. <input type="text" name="q3" placeholder="Question 3" size="80" style="height:2em;line-height:1.5em;" >
-      <input type="radio" name="q3type" value="number" checked="checked">number</input>
+      <p>3. <input type="text" name="q3" class="button magenta" placeholder="Question 3" size="80" style="height:2em;line-height:1.5em;" >
+      <input type="radio" name="q3type" class="button magenta" value="number" checked="checked">number</input>
       <input type="radio" name="q3type" value="word">word</input><br><br>
-      <p>4. <input type="text" name="q4" placeholder="Question 4" size="80" style="height:2em;line-height:1.5em;" >
+      <p>4. <input type="text" name="q4" class="button magenta" placeholder="Question 4" size="80" style="height:2em;line-height:1.5em;" >
       <input type="radio" name="q4type" value="number" checked="checked">number</input>
       <input type="radio" name="q4type" value="word">word</input><br><br>
-      <p>5. <input type="text" name="q5" placeholder="Question 5" size="80" style="height:2em;line-height:1.5em;" >
+      <p>5. <input type="text" name="q5" class="button magenta" placeholder="Question 5" size="80" style="height:2em;line-height:1.5em;" >
       <input type="radio" name="q5type" value="number" checked="checked">number</input>
       <input type="radio" name="q5type" value="word">word</input> 
 <br><br>     
-      <input class="button" type="submit" name="submitcreate" value="        Create        " class=""></input>
+      <input type="submit" name="submitcreate" value="        Create        " class="button red rounded large"></input>
 </div>
 </form>
 
