@@ -57,7 +57,7 @@ function loadQuestions(e) {
 	    }
 	    $("#survey").append('</br></br>');
 	    if (i == data.length - 1){
-		$("#survey").append('<button id="submitIt" name="submitSurvey" type="submit" >Submit</button>');
+		$("#survey").append('<button class="button red large rounded" id="submitIt" name="submitSurvey" type="submit" >Submit</button>');
 		//$("#submitIt").click(submitSurvey);
 	    }
 	}	
