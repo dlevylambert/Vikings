@@ -14,20 +14,21 @@
   </center>
 </div>
 
-{% if user %}
 <center>
+{% if user %}
 <br><b><font size="4">Looking at the profile of:</font></b>
-<div id="anyUser">
+<div id="anyUser" align="center">
 {{user}}
 </div>
 <div id="ytapiplayer1">
 </div>
 {% endif %}
 
-<br><b><font size="4">Logged in as:</font></b><div id="userInfo">
+<br><b><font size="4">Logged in as:</font></b><div id="userInfo" align="center">
 </div>
 <div id="ytapiplayer2">
 </div>
+</center>
 <script src="/static/js/profile.js"></script>
 <script type="text/javascript" src="/static/js/swfobject.js"
 id="trailer"></script>
