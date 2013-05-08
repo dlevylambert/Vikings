@@ -75,7 +75,7 @@ def findDiffs(surveyName, user):
     for x in allUsers:
 
         if x != user:
-            diffs = [math.fabs(ord(allUsers[x][i]) - ord(thisUser[i])) for i in range(0, len(thisUser))]
+            diffs = [math.pow(math.fabs(ord(allUsers[x][i]) - ord(thisUser[i])), 2)  for i in range(0, len(thisUser))]
             thisSurvey['userdifferences'][user].update({x:sum(diffs)})
     surveys.update(
         {'name':surveyName},
@@ -119,6 +119,7 @@ def match(surveyName, user):
     matchesData[2] = [x for x in percents if percents[x] == matchesData[0]]
     matchesData[3] = [x for x in percents if percents[x] == matchesData[1]]
     matchesData[4] = tracePaths(surveyName, user)
+    matchesData[5] = [percents[x] for x in matchesData[4]]
     
     print matchesData
     return matchesData
