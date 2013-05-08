@@ -88,7 +88,7 @@ def findPercents(surveyName, user):
     thisSurvey['userpercentages'][user] = {}    
 
     numQs = len(thisSurvey['useranswers'][user])
-    maxDiff = 4.0 * numQs
+    maxDiff = 16.0 * numQs
     
     for x in sumDiffs:
         percent = 100 - (sumDiffs[x] / maxDiff) * 100
