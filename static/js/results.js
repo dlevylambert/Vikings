@@ -28,27 +28,37 @@ function loadNames() {
 }
 
 
+//Not really sure why all these percentages are the same. Dina and Helen should investigate the algorithm because something strange seems to be going on here.
 
 function loadMatches(e) {
     surveyname = $(this).attr("value");
     $("#matches").empty();
     $.getJSON("/matchfind", {surveyname: surveyname}, function(data){
-	$("#matches").append("</br>");
-	$("#matches").append("<b>" + "BEST: </b> ");
+	$("#matches").append("<b>" + "BEST: </b>");
+	$("#matches").append("<table class='table-striped'>");
+	$("#matches").append("<thead> <tr> <th>Name</th><th>Profile</th><th>Match %</th> </tr></thead><tbody>")
 	for (var i=0; i <data[2].length; i++) {
-	    $("#matches").append(data[2][i] + " profile: <a href='../profile/" + data[2][i] +"'> link to profile "+ "</a>");
-	    $("#matches").append(data[0]);
+	    
+	    $("#matches").append("<tr><td>" + data[2][i] + "</td> <td> <a href='../profile/" + data[2][i] +"'> Go to Profile "+ "</a></td><td>" + data[0] + "</td></tr>");
+	    console.log(data[0]);
+	    
 	}
+	$("#matches").append("</tbody></table>");
 	$("#matches").append("<b>" + "WORST: </b> ");
+	$("#matches").append("<table class='table-striped'>");
+	$("#matches").append("<thead> <tr> <th>Name</th><th>Profile</th><th>Match %</th> </tr></thead><tbody>")
 	for (var i=0; i <data[3].length; i++) {
-	    $("#matches").append(data[3][i] + " profile: <a href='../profile/" + data[2][i]+ "'>link to profile " + "</a>" );
-	    $("#matches").append(data[1]);
+	    $("#matches").append("<tr><td>" + data[3][i] + "</td> <td> <a href='../profile/" + data[2][i] +"'> Go to Profile "+ "</a></td><td>" + data[1] + "</td></tr>");    
 	}
-	$("#matches").append("<b>" + "OVERALL BEST: </b> ");
-	for (var i=0; i <data[4].length; i++) {
-	    $("#matches").append(data[4][i] + " profile: <a href='../profile/" + data[2][i]+ "'>link to profile " + "</a>" );
-	    $("#matches").append(data[5][i]);
-	}
+	$("#matches").append("</tbody></table>");
+	//$("#matches").append("<b>" + "OVERALL BEST: </b> ");
+	//$("#matches").append("<table>");
+	//for (var i=0; i <data[4].length; i++) {
+	  //  $("#matches").append("<tr><td>" + data[4][i] + "</td> <td> <a href='../profile/" + data[2][i] +"'> Go to Profile "+ "</a></td><td>Match %:" + data[5][i] + "</td></tr>");    
+	    
+
+	//}
+	//$("#matches").append("</table>");
 	//data is matches
     });
 }
