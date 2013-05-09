@@ -51,14 +51,14 @@ function loadMatches(e) {
 	    $("#matches").append("<tr><td>" + data[3][i] + "</td> <td> <a href='../profile/" + data[2][i] +"'> Go to Profile "+ "</a></td><td>" + data[1] + "</td></tr>");    
 	}
 	$("#matches").append("</tbody></table>");
-	//$("#matches").append("<b>" + "OVERALL BEST: </b> ");
-	//$("#matches").append("<table>");
-	//for (var i=0; i <data[4].length; i++) {
-	  //  $("#matches").append("<tr><td>" + data[4][i] + "</td> <td> <a href='../profile/" + data[2][i] +"'> Go to Profile "+ "</a></td><td>Match %:" + data[5][i] + "</td></tr>");    
+	$("#matches").append("<b>" + "OVERALL BEST: </b> ");
+	$("#matches").append("<table>");
+	for (var i=0; i < 1; i++) {
+	    $("#matches").append("<tr><td>" + data[4][i] + "</td> <td> <a href='../profile/" + data[2][i] +"'> Go to Profile "+ "</a></td><td>Match %:" + data[5][i] + "</td></tr>");    
 	    
 
-	//}
-	//$("#matches").append("</table>");
+	}
+	$("#matches").append("</table>");
 	//data is matches
     });
 }
