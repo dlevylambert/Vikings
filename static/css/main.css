@@ -34,7 +34,7 @@ background-color: #fff; /* set background color to match above border color */
 body#tab1 li.tab1 button, body#tab2 li.tab2 button, body#tab3 li.tab3 button, body#tab4 li.tab4 button
                    { /* settings for selected tab link */
 background-color: #fff; /* set selected tab background color as desired */
-color: #000; /* set selected tab link color as desired */
+color: #ffffff; /* set selected tab link color as desired */
 position: relative;
 top: 1px;
 padding-top: 4px; /* must change with respect to padding (X) above and below */
@@ -53,7 +53,7 @@ color:#FFFFFF; /* set unselected tab color as desired */
 margin-right: 0px; /* set additional spacing between tabs as desired */
 border-bottom: none;
 font-size: 24px;
-text-shadow: 2px 2px 2px #FFFFFF;
+text-shadow: 0px 0px 0px #FFFFFF;
                    }
 
 ul#tabnav form button:hover { /* settings for hover effect */
