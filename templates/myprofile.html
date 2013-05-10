@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Matching with Vikings{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block tabs %}{{super()}}{% endblock %}
+{% block body %}
+<div class="content">
+   <font color="#013F5C">
+  <center>
+    <div class="text">
+      <br><h2>Welcome to your Profile.</h2></br>
+    </div>
+  </center>
+</div>
+
+<center>
+
+<br><br><font size="4"><b>Logged in as:</font></b><div id="userInfo" align="center">
+</div>
+<div id="ytapiplayer1">
+</div>
+</center>
+<script src="/static/js/myprofile.js"></script>
+<script type="text/javascript" src="/static/js/swfobject.js"
+id="trailer"></script>
+{% endblock %}
