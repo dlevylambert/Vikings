@@ -10,10 +10,12 @@ Group Members
 * Shreya Kalva
 
 
-PROJECT RUNNING ON: <a href="http://ml7.stuycs.org:6565/home">
-project</a>
+PROJECT RUNNING ON: <a href="http://ml7.stuycs.org:6565/home">ml7.stuycs.org:6565/home</a>
 
-
+Things to consider adding/improving/changing:
+*get location of people, and then how to get to one another. perhaps suggest meeting place
+*variable number of questions
+*figure out how to import pictures
 
 For Friday April 5th:
 * login stuff? with encripted password perhaps?
