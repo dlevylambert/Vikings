@@ -16,6 +16,7 @@ Things to consider adding/improving/changing:
 *get location of people, and then how to get to one another. perhaps suggest meeting place
 *variable number of questions
 *figure out how to import pictures
+*send email to matched up people
 
 For Friday April 5th:
 * login stuff? with encripted password perhaps?
