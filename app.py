@@ -23,7 +23,7 @@ def home():
         if request.form.has_key("tabcreate"):
             return redirect(url_for("create"))
         if request.form.has_key("tabprofile"):
-            return redirect(url_for("profile"))
+            return redirect(url_for("myprofile"))
         if request.form.has_key("tabsurvey"):
             return redirect(url_for("survey"))
         if request.form.has_key("tabresults"):
@@ -82,7 +82,7 @@ def login():
         if request.form.has_key("tabcreate"):
             return redirect(url_for("create"))
         if request.form.has_key("tabprofile"):
-            return redirect(url_for("profile"))
+            return redirect(url_for("myprofile"))
         if request.form.has_key("tabsurvey"):
             return redirect(url_for("survey"))
         if request.form.has_key("tabresults"):
@@ -104,7 +104,7 @@ def results():
         if request.form.has_key("tabcreate"):
             return redirect(url_for("create"))
         if request.form.has_key("tabprofile"):
-            return redirect(url_for("profile"))
+            return redirect(url_for("myprofile"))
         if request.form.has_key("tabsurvey"):
             return redirect(url_for("survey"))
         if request.form.has_key("tabresults"):
@@ -113,6 +113,7 @@ def results():
 @app.route("/getUserInfo")
 def getUserInfo():
     username = session["user"]
+    print util.getUser(username)
     return json.dumps(util.getUser(username))
 
 @app.route("/getOtherInfo")
@@ -141,21 +142,25 @@ def signup():
             #print gender
             hobbies = str(request.form["Hobbies"])
             #print hobbies
-            #youtube = str(request.form["Youtube"])
-            #print youtube
-            #reached = False
-            #youtubeID=""
+            youtube = str(request.form["Youtube"])
+            print youtube
+            reached = False
+            i = 0
+            youtubeID=""
+            index = youtube.find('=')
+            #print index
+            if (index):
+                youtubeID= youtube[index + 1:len(youtube)]
             #for letter in youtube:
-            #    if (reached):
-            #        youtubeID+=letter
-            #    a = ""
-            #    a = youtube[i]+youtube[i+1]+youtube[i+2]+youtube[i+3]+youtube[i+4]
-            #    if a == "ch?v=":
-            #        reached = True
-            #if (reached == False):
-            #    youtubeID="9ZEURntrQOg"
-            validate = util.createUser(user,password,age,realname,gender,hobbies)
-            #validate = util.createUser(user,password,age,realname,gender,hobbies,youtubeID)
+                #if (reached):
+                    #youtubeID=youtubeID + letter
+                    #if (letter == "=")
+                    #reached = True
+                    #if (reached == False):
+                    #youtubeID="9ZEURntrQOg"
+                    #print youtubeID
+                    #validate = util.createUser(user,password,age,realname,gender,hobbies)
+            validate = util.createUser(user,password,age,realname,gender,hobbies,youtubeID)
             if validate == 0:
                 print "no"
                 return render_template("signup.html", failure = True)
@@ -175,13 +180,46 @@ def signup():
         if request.form.has_key("tabcreate"):
             return redirect(url_for("create"))
         if request.form.has_key("tabprofile"):
-            return redirect(url_for("profile"))
+            return redirect(url_for("myprofile"))
         if request.form.has_key("tabsurvey"):
             return redirect(url_for("survey"))
         if request.form.has_key("tabresults"):
             return redirect(url_for("results"))
 
-@app.route("/profile",methods=["POST","GET"])
+@app.route("/myprofile",methods=["POST","GET"])
+def myprofile():
+    if request.method=="GET":
+        if 'user' not in session:
+            return redirect(url_for("login"))
+        #return render_template("profile.html", user=session['user'])
+        return render_template("myprofile.html")
+    else:
+        if request.form.has_key("tablogin"):
+            return redirect(url_for("login"))
+        if request.form.has_key("tabhome"):
+            return redirect(url_for("home"))
+        if request.form.has_key("tabsignup"):
+            return redirect(url_for("signup"))
+        if request.form.has_key("tabcreate"):
+            return redirect(url_for("create"))
+        if request.form.has_key("tabprofile"):
+            return redirect(url_for("myprofile"))
+        if request.form.has_key("tabsurvey"):
+            return redirect(url_for("survey"))
+        if request.form.has_key("tabresults"):
+            return redirect(url_for("results"))
+
+@app.route("/getsong")
+def getsong():
+    username = session["user"]
+    print "username: " + username
+    return json.dumps(util.getSong(username))
+
+@app.route("/getsongother")
+def getsongother():
+    otherUser = request.args.get("otherUser", "").strip()
+    return json.dumps(util.getSong(otherUser))
+
 @app.route("/profile/<user>",methods=["POST","GET"])
 def profile(user=None):
     if request.method=="GET":
@@ -199,7 +237,7 @@ def profile(user=None):
         if request.form.has_key("tabcreate"):
             return redirect(url_for("create"))
         if request.form.has_key("tabprofile"):
-            return redirect(url_for("profile"))
+            return redirect(url_for("myprofile"))
         if request.form.has_key("tabsurvey"):
             return redirect(url_for("survey"))
         if request.form.has_key("tabresults"):
@@ -222,7 +260,7 @@ def survey():
         if request.form.has_key("tabcreate"):
             return redirect(url_for("create"))
         if request.form.has_key("tabprofile"):
-            return redirect(url_for("profile"))
+            return redirect(url_for("myprofile"))
         if request.form.has_key("tabsurvey"):
             return redirect(url_for("survey"))
         if request.form.has_key("tabresults"):
@@ -254,7 +292,7 @@ def create():
         if request.form.has_key("tabcreate"):
             return redirect(url_for("create"))
         if request.form.has_key("tabprofile"):
-            return redirect(url_for("profile"))
+            return redirect(url_for("myprofile"))
         if request.form.has_key("tabsurvey"):
             return redirect(url_for("survey"))
         if request.form.has_key("tabresults"):

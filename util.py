@@ -16,6 +16,7 @@ res = db.authenticate('ml7','ml7')
 db = connection['z-pd6']
 users = db.VikingsUsers
 surveys = db.VikingsSurveys
+songs = db.VikingsSongs
 #pics = db.VikingsPics
 #fs = GridFS(db, 'pics')
 
@@ -37,14 +38,24 @@ def takeSurvey(surveyname, user, ans):
     print allAnswers
     return True
 
-def createUser(user,password,age,realname,gender,hobbies):
+def createUser(user,password,age,realname,gender,hobbies, youtube):
     if users.find_one({"user" : user}) != None:
         return False
     tmp = base64.b64encode(password)
-    #newuser = {"user" : user, "pass" : tmp, "age": age, "realname":realname, "gender":gender, "hobbies": hobbies, "youtube":youtube}
     newuser = {"user" : user, "pass" : tmp, "age": age, "realname":realname, "gender":gender, "hobbies": hobbies}
+    #newuser = {"user" : user, "pass" : tmp, "age": age, "realname":realname, "gender":gender, "hobbies": hobbies}
     users.insert(newuser)
+    newsong = {"user": user, "youtube":youtube}
+    songs.insert(newsong)
+    print users.find_one({"user": user})
     return True
+
+def getSong(user):
+    print "USER" + user
+    info = dict(songs.find_one({'user':user}))
+    print info
+    result = [info[x] for x in info]
+    return result[1:]
 
 def checkUserPass(user,password):
     encpass = base64.b64encode(password)
@@ -184,6 +195,10 @@ def editUserInfo(userName, fieldChange, newValue):
 
 
 #if __name__ == "__main__":
+    #surveys.drop()
+    #   users.drop()
+    #    songs.drop()
+#    print users.find_one({"user": "DDD"})
 #    createUser("Dina", "hello")
 #    print checkUserPass("Dina", "hello")
 #    print checkUserPass("Dina", "he")
